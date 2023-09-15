@@ -1,9 +1,11 @@
 import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +22,10 @@ class RaiseIncidentPage extends StatefulWidget {
 }
 
 class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
-  final TextEditingController _incidentType = TextEditingController();
-  final TextEditingController _description = TextEditingController();
-  final TextEditingController _location = TextEditingController();
+  TextEditingController _incidentType = TextEditingController();
+  TextEditingController _description = TextEditingController();
+  TextEditingController _location = TextEditingController();
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   String selectedIncident = "flood"; // Initial selected value
   String selectedAuthority =
@@ -150,14 +153,25 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                             isApproved: false,
                             isOpen: true);
                         try {
+                          Loadings.showLoadingDialog(context, _keyLoader);
                           await DbMethods().raiseIncident(incident);
+                          Navigator.of(_keyLoader.currentContext!,
+                                  rootNavigator: true)
+                              .pop();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                                   "Incident Raised and pending for approval" +
                                       widget.latitude.toString() +
                                       " " +
                                       widget.longitude.toString())));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
                         } catch (e) {
+                          Navigator.of(_keyLoader.currentContext!,
+                                  rootNavigator: true)
+                              .pop();
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text("Failed to register")));
