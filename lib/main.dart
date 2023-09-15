@@ -1,6 +1,6 @@
 import 'package:disaster_safety/firebase_options.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
-import 'package:disaster_safety/screens/homepage.dart';
+import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';

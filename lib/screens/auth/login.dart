@@ -1,6 +1,6 @@
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/auth/sign_up.dart';
-import 'package:disaster_safety/screens/homepage.dart';
+import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';

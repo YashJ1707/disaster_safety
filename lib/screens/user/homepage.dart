@@ -1,10 +1,11 @@
 import 'package:disaster_safety/router.dart';
-import 'package:disaster_safety/screens/alert_page.dart';
+import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
-import 'package:disaster_safety/screens/community_page.dart';
-import 'package:disaster_safety/screens/raise_incident.dart';
-import 'package:disaster_safety/screens/settings_page.dart';
-import 'package:disaster_safety/screens/tips_page.dart';
+import 'package:disaster_safety/screens/user/community_page.dart';
+import 'package:disaster_safety/screens/user/raise_incident.dart';
+import 'package:disaster_safety/screens/user/settings_page.dart';
+import 'package:disaster_safety/screens/user/tips_page.dart';
+import 'package:disaster_safety/screens/user/updates_page.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatelessWidget {
     CommunityPage(),
     AlertPage(),
     TipsPage(),
+    UpdatesPage(),
     SettingsPage()
   ];
 
@@ -27,6 +29,7 @@ class HomePage extends StatelessWidget {
     "Community",
     "Alerts",
     "Tips",
+    "Updates",
     "Settings"
   ];
 
@@ -35,6 +38,7 @@ class HomePage extends StatelessWidget {
     Icons.group_add,
     Icons.warning_outlined,
     Icons.tips_and_updates,
+    Icons.update,
     Icons.settings,
   ];
 

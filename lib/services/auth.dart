@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,25 +48,20 @@ class AuthMethods {
               .where('userid', isEqualTo: firebaseUser.user!.uid)
               .get();
           List<DocumentSnapshot> documents = result.docs;
-          print("stage 3");
+
           if (documents.isEmpty) {
-            print("stage 4");
             // Update data to server if new user
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(firebaseUser.user!.uid)
-                .set(
-              {
-                'useremail': firebaseUser.user!.email,
-                'displayname': firebaseUser.user!.displayName,
-                'userid': firebaseUser.user!.uid,
-              },
-              SetOptions(merge: true),
-            );
+            Map<String, dynamic> userdata = {
+              'uid': firebaseUser.user!.uid,
+              'useremail': firebaseUser.user!.email,
+              'displayname': firebaseUser.user!.displayName,
+              'userid': firebaseUser.user!.uid,
+            };
+
+            DbMethods().signUP(userdata);
           }
-          print("stage 5");
         }
-        print("stage 6");
+
         // return firebaseUser;
       } catch (e) {
         print(e);
@@ -86,8 +82,7 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
-      print("fonr");
-      print(user.user!.email);
+     
       // return user;
 
       // FirebaseAuth.instance.authStateChanges().listen((User user) {
