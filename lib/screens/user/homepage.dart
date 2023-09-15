@@ -4,6 +4,7 @@ import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
+import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     RegisterDisasterScreen(),
+    MapsScreen(),
     AlertPage(),
     TipsPage(),
     UpdatesPage(),
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   List<String> pagetitle = [
     "Register Disaster",
+    "View Map",
     "Alerts",
     "Tips",
     "Updates",
@@ -36,6 +39,7 @@ class _HomePageState extends State<HomePage> {
 
   List<IconData> pageIcons = [
     Icons.new_label,
+    Icons.map,
     Icons.warning_outlined,
     Icons.tips_and_updates,
     Icons.update,
