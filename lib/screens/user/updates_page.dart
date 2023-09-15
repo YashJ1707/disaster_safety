@@ -5,6 +5,18 @@ class UpdatesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Updates"),
+        leading: Icon(Icons.update_sharp),
+      ),
+      body: SingleChildScrollView(
+          child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: Column(children: []),
+        ),
+      )),
+    );
   }
 }

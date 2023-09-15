@@ -36,7 +36,7 @@ class Tinput extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-          border: const OutlineInputBorder(),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           hintText: hint,
           label: Text(label),
         ),

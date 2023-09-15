@@ -58,7 +58,7 @@ class AuthMethods {
               'userid': firebaseUser.user!.uid,
             };
 
-            DbMethods().signUP(userdata);
+            DbMethods().signIn(userdata);
           }
         }
 
@@ -71,7 +71,7 @@ class AuthMethods {
 
 //sign in with email and password
 
-  Future<void> signIn(
+  Future<UserCredential?> signIn(
       {required BuildContext context,
       required String email,
       required String password}) async {
@@ -82,24 +82,11 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
-     
-      // return user;
-
-      // FirebaseAuth.instance.authStateChanges().listen((User user) {
-
-      // Provider.of<LoadingProvider>(context, listen: false).loadPage(false);
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => DesignBTMMyHomePage(),
-      //   ),
-      // );
-      // } else {
-      // return Center(
-      // child: Text("failed to login"),
-      // );
-      // }
-      // });
+      if (user != null) {
+        await SecureStorage().setUserId(user.user!.uid);
+        await SecureStorage().setUsername(email);
+      }
+      return user;
     } on FirebaseAuthException catch (e) {
       print(e.code);
       print(e.message);
@@ -112,36 +99,31 @@ class AuthMethods {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Account Does not Exists")));
           break;
+
+        case "INVALID_LOGIN_CREDENTIALS":
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Invalid Password")));
       }
+      return null;
     }
   }
 
-  Future<void> signUp(
+  Future<UserCredential?> signUp(
       {required BuildContext context,
-      required String fullname,
       required String email,
       required String password}) async {
-    final _username = email.replaceAll(RegExp(r'@(\w*)\.(\w*)'), "").trim();
-
     try {
-      UserCredential user = await _auth.createUserWithEmailAndPassword(
+      UserCredential? user = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password.trim());
-      Map<String, dynamic> _userdata = {
-        'username': _username,
-        'useremail': email.trim(),
-        'displayname': fullname.trim(),
-        'address': '',
-        'gender': '',
-        'mobileNumber': '',
-      };
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.user!.uid)
-          .set(_userdata);
+
+      return user;
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      print(e);
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Email Already in Use")));
+      return null;
+    } catch (e) {
+      return null;
     }
   }
 
