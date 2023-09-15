@@ -1,9 +1,14 @@
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/auth/sign_up.dart';
+import 'package:disaster_safety/screens/homepage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,6 +53,10 @@ class _LoginPageState extends State<LoginPage> {
                   txtColor: Consts.kblack,
                   onpress: () async {
                     //  sign in code
+                    await context.read<AuthMethods>().signIn(
+                        context: context,
+                        email: _usernameController.text.toString(),
+                        password: _passController.text.toString());
                   }),
               const SizedBox(
                 height: 15,
@@ -56,28 +65,26 @@ class _LoginPageState extends State<LoginPage> {
                   bgColor: Consts.kprimary,
                   title: "Continue with Google",
                   txtColor: Consts.kblack,
-
                   onpress: () async {
-
-                    // await context.read<AuthMethods>().signInWithGoogle();
-                    // FirebaseAuth.instance
-                    //     .authStateChanges()
-                    //     .listen((User? user) {
-                    //   if (user != null) {
-                    //     Navigator.pushReplacement(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => HomePage(),
-                    //       ),
-                    //     );
-                    // } else {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(
-                    //       content: Text("Failed login"),
-                    //     ),
-                    //   );
-                    // }
-                    // });
+                    await context.read<AuthMethods>().signInWithGoogle();
+                    FirebaseAuth.instance
+                        .authStateChanges()
+                        .listen((User? user) {
+                      if (user != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Failed login"),
+                          ),
+                        );
+                      }
+                    });
                   }),
               const SizedBox(
                 height: 15,

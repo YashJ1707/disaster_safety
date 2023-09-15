@@ -1,9 +1,11 @@
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
+import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/text_styles.dart';
 import 'package:disaster_safety/shared/themes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -50,10 +52,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 keytype: TextInputType.emailAddress,
               ),
               Tinput(
-                hint: "Enter mobile number",
-                label: "Mobile No",
-                controller: _mobileController,
-                keytype: TextInputType.phone,
+                hint: "Enter role of user",
+                label: "Role",
+                controller: _roleController,
               ),
               Tinput(
                 hint: "Enter password",
@@ -70,10 +71,20 @@ class _SignUpPageState extends State<SignUpPage> {
                     Map<String, dynamic> data = {
                       "name": _nameController.text.toString(),
                       "email": _emailController.text.toString(),
-                      "mobile": _mobileController.text.toString(),
                       "role": _roleController.text.toString(),
                       "passw": pass,
                     };
+                    print(data);
+                    // await AuthMethods(_aut
+                    // h).
+                    // AuthMethods db = AuthMethods();
+                    // String res = await db.signUp(data: data);
+                    // string res = "";
+                    // if (res == "User Already Exists") {
+                    // Routes.snack(context, "Email id already used");
+                    // } else {
+                    // Routes.pushReplace(context, LoginPage());
+                    // }
                   }),
               Padding(
                 padding: const EdgeInsets.all(8.0),
