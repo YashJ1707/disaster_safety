@@ -6,13 +6,14 @@ class UserModel {
   final double latitude;
   final double longitude;
 
-  UserModel(
-      {required this.latitude,
-      required this.longitude,
-      required this.id,
-      required this.name,
-      required this.email,
-      required this.role});
+  UserModel({
+    required this.latitude,
+    required this.longitude,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.role,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -24,6 +25,3 @@ class UserModel {
         longitude: json['longitude'] ?? 0);
   }
 }
-
-
-// usages

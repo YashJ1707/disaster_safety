@@ -22,7 +22,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _deptController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
@@ -86,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ? Column(
                         children: [
                           Tinput(
-                            controller: TextEditingController(),
+                            controller: _deptController,
                             hint: "Enter department name",
                             label: "Department",
                           ),
@@ -99,12 +99,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     onpress: () async {
                       Loadings.showLoadingDialog(context, _keyLoader);
                       try {
-                        Map<String, dynamic> data = {
+                        Map<String, dynamic> user_data = {
                           "name": _nameController.text.toString(),
                           "useremail": _emailController.text.toString(),
                           "role": selectedRole,
                         };
 
+                        Map<String, dynamic> local_body_data = {
+                          "name": _nameController.text.toString(),
+                          "useremail": _emailController.text.toString(),
+                          "role": selectedRole,
+                          "dept_name": _deptController.text,
+                        };
+
+                        Map<String, dynamic> data = selectedRole == "user"
+                            ? user_data
+                            : local_body_data;
                         UserCredential? user = await context
                             .read<AuthMethods>()
                             .signUp(
@@ -139,10 +149,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Texts.span("Already have an account ? "),
                       ),
                       BtnText(
-                          title: "Login",
-                          onpress: () {
-                            Routes.push(context, LoginPage());
-                          }),
+                        title: "Login",
+                        onpress: () {
+                          Routes.push(context, LoginPage());
+                        },
+                      ),
                     ],
                   ),
                 )
