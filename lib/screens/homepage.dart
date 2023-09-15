@@ -37,6 +37,7 @@ class HomePage extends StatelessWidget {
     Icons.tips_and_updates,
     Icons.settings,
   ];
+
   @override
   Widget build(BuildContext context) {
     // Provider.of(context).
@@ -72,7 +73,9 @@ class HomePage extends StatelessWidget {
               return PageBtn(
                   title: pagetitle[index],
                   icon: pageIcons[index],
-                  onpress: () {},
+                  onpress: () {
+                    Routes.push(context, pages[index]);
+                  },
                   index: index);
             })),
       ),
