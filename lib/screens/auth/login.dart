@@ -23,11 +23,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
+              const Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("WELCOME BACK !!"),
               ),
-              Padding(
+              const Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text("Login"),
               ),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 15,
               ),
-              Padding(
+              const Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text("Don't have an account ? "),
               ),
