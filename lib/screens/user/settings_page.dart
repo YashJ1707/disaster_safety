@@ -5,6 +5,18 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Settings "),
+        leading: Icon(Icons.settings),
+      ),
+      body: SingleChildScrollView(
+          child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: Column(children: []),
+        ),
+      )),
+    );
   }
 }

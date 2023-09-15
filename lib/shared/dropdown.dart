@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatefulWidget {
@@ -19,7 +22,13 @@ class _CustomDropdownState extends State<CustomDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      width: min(300, MediaQuery.of(context).size.width * 0.8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Consts.kdark),
+        borderRadius: BorderRadius.circular(Consts.kborderRadius),
+      ),
       child: DropdownButton<String>(
         value: widget.selectedValue,
         onChanged: widget.onChanged,

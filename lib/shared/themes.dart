@@ -8,6 +8,8 @@ class Consts {
   static const Color kwhite = Colors.white;
   static const Color kdark = Color(0xff212121);
 
+// border radius
+  static const double kborderRadius = 10;
   Widget h1(String label) {
     return Text(label);
   }

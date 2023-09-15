@@ -2,6 +2,7 @@ import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/auth/sign_up.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +19,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   @override
@@ -50,19 +53,35 @@ class _LoginPageState extends State<LoginPage> {
               ),
               BtnPrimary(
                   title: "Login",
-                  txtColor: Consts.kblack,
+                  txtColor: Consts.kwhite,
                   onpress: () async {
                     //  sign in code
-                    await context.read<AuthMethods>().signIn(
-                        context: context,
-                        email: _usernameController.text.toString(),
-                        password: _passController.text.toString());
+                    Loadings.showLoadingDialog(context, _keyLoader);
+                    try {
+                      UserCredential? user = await context
+                          .read<AuthMethods>()
+                          .signIn(
+                              context: context,
+                              email: _usernameController.text.toString(),
+                              password: _passController.text.toString());
+
+                      if (user != null) {
+                        Navigator.of(_keyLoader.currentContext!,
+                                rootNavigator: true)
+                            .pop();
+                        Routes.pushReplace(context, HomePage());
+                      }
+                    } catch (e) {
+                      Navigator.of(_keyLoader.currentContext!,
+                              rootNavigator: true)
+                          .pop();
+                    } finally {}
                   }),
               const SizedBox(
                 height: 15,
               ),
               BtnPrimary(
-                  bgColor: Consts.kprimary,
+                  bgColor: Consts.klight,
                   title: "Continue with Google",
                   txtColor: Consts.kblack,
                   onpress: () async {

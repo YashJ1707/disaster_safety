@@ -5,6 +5,18 @@ class AlertPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Alerts "),
+        leading: Icon(Icons.warning),
+      ),
+      body: SingleChildScrollView(
+          child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: Column(children: []),
+        ),
+      )),
+    );
   }
 }

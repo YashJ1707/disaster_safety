@@ -6,7 +6,7 @@ class DbMethods {
   final CollectionReference incidentRef =
       FirebaseFirestore.instance.collection("incident");
   final CollectionReference userRef =
-      FirebaseFirestore.instance.collection("user");
+      FirebaseFirestore.instance.collection("users");
   final CollectionReference alertRef =
       FirebaseFirestore.instance.collection("alerts");
 
@@ -36,11 +36,15 @@ class DbMethods {
   }
 
   // sign up
-  Future<void> signUP(data) async {
+  Future<void> signIn(data) async {
     userRef.doc(data['uid']).set(
       {data},
       SetOptions(merge: true),
     );
+  }
+
+  Future<void> signUp(Map<String, dynamic> data) async {
+    await userRef.add(data);
   }
 
   // Future<List<Alerts>> getAlerts(){
