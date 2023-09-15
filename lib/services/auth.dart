@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,17 +32,24 @@ class AuthMethods {
       try {
         UserCredential firebaseUser =
             await FirebaseAuth.instance.signInWithCredential(credential);
+        print("stage 1");
         if (firebaseUser != null) {
+          // settings firebase
+          // setting loggin persistant
+          print("stage 2");
+          String uid = firebaseUser.user!.uid;
+          print(uid);
+          await SecureStorage().setUserId(uid);
+
           // Check is already sign up
           final QuerySnapshot result = await FirebaseFirestore.instance
               .collection('users')
               .where('userid', isEqualTo: firebaseUser.user!.uid)
               .get();
           List<DocumentSnapshot> documents = result.docs;
-          print("printing documents");
-          print(documents.isEmpty);
-          print(documents);
+          print("stage 3");
           if (documents.isEmpty) {
+            print("stage 4");
             // Update data to server if new user
             FirebaseFirestore.instance
                 .collection('users')
@@ -55,7 +63,9 @@ class AuthMethods {
               SetOptions(merge: true),
             );
           }
+          print("stage 5");
         }
+        print("stage 6");
         // return firebaseUser;
       } catch (e) {
         print(e);
@@ -146,6 +156,8 @@ class AuthMethods {
   }
 
   Future<void> resetPassword(String email) async {
-    return _auth.sendPasswordResetEmail(email: email);
+    await _auth.sendPasswordResetEmail(email: email);
+    await SecureStorage().setUserId(null);
+    await SecureStorage().setUsername(null);
   }
 }
