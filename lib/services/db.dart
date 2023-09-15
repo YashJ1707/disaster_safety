@@ -112,17 +112,20 @@ class DbMethods {
 
   // load users data
   Future<UserModel?> loadUserData() async {
-    late UserModel user;
+    UserModel? user;
     String? userEmail = await SecureStorage().getUsername();
+    print(userEmail);
     if (userEmail != null) {
       QuerySnapshot<Object?> snapshot =
-          await userRef.where('email', isEqualTo: userEmail).get();
+          await userRef.where('useremail', isEqualTo: userEmail).get();
+      print(snapshot.docs.length);
       if (snapshot.docs.isNotEmpty) {
         for (var element in snapshot.docs) {
           Map<String, dynamic> d = {};
           d = element.data() as Map<String, dynamic>;
           user = UserModel.fromJson(d);
         }
+        print(user);
         return user;
       } else {
         return null;

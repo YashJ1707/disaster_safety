@@ -1,5 +1,5 @@
 class UserModel {
-  final int? id;
+  final String? id;
   final String? name;
   final String? email;
   final String? role;
@@ -16,12 +16,12 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        id: json['id'],
+        id: json['uid'],
         name: json['name'],
-        email: json['email'],
+        email: json['useremail'],
         role: json['role'],
-        latitude: json['latitude'],
-        longitude: json['longitude']);
+        latitude: json['latitude'] ?? 0,
+        longitude: json['longitude'] ?? 0);
   }
 }
 

@@ -1,5 +1,8 @@
+import 'package:disaster_safety/models/user_model.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/shared/buttons.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:disaster_safety/shared/text_styles.dart';
 import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
@@ -16,38 +19,48 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings "),
-        leading: Icon(Icons.settings),
+        title: const Text("Settings "),
+        leading: const Icon(Icons.settings),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           child: Container(
             width: width * 0.8,
-            child: Column(children: [
-              profile_row("Name", "Dhananjay"),
-              profile_row("Email", "abc@gmail.com"),
-              profile_row("Phone No", "9484938993"),
-              profile_row("Account Type", "role"),
-              const SizedBox(
-                height: 40,
-              ),
-              BtnPrimary(
-                  title: "LOG OUT",
-                  bgColor: Consts.klight,
-                  txtColor: Consts.kdark,
-                  onpress: () async {
-                    await context.read<AuthMethods>().signOut();
+            child: FutureBuilder<UserModel?>(
+              future: DbMethods().loadUserData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    UserModel user = snapshot.data!;
+                    return Column(children: [
+                      profile_row("Name", user.name!),
+                      profile_row("Email", user.email!),
+                      profile_row("Account Type", user.role!),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      BtnPrimary(
+                          title: "LOG OUT",
+                          bgColor: Consts.klight,
+                          txtColor: Consts.kdark,
+                          onpress: () async {
+                            await context.read<AuthMethods>().signOut();
 
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ),
-                        (route) => false);
-                  })
-            ]),
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                                (route) => false);
+                          })
+                    ]);
+                  }
+                }
+                return Loadings.staticLoader();
+              },
+            ),
           ),
         ),
       )),
