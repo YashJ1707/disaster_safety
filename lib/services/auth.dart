@@ -28,8 +28,6 @@ class AuthMethods {
       //saving the user data to shared preferences
 
       // // sign in method
-      final _username =
-          googleUser.email.replaceAll(RegExp(r'@(\w*)\.(\w*)'), "").trim();
       try {
         UserCredential firebaseUser =
             await FirebaseAuth.instance.signInWithCredential(credential);

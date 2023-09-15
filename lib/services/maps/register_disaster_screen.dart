@@ -1,7 +1,7 @@
 import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/services/geolocator.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -16,7 +16,7 @@ class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
   // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
   bool disabled = true;
-  Set<Marker> markers = Set();
+  Set<Marker> markers = {};
   late Position _position;
   late LatLng location;
   bool loading = true;
@@ -54,7 +54,7 @@ class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
     TextEditingController searchController = TextEditingController();
     return Scaffold(
       body: loading == true
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: Loadings.staticLoader())
           : Stack(
               // alignment: Alignment.bottomCenter,
               children: [
@@ -80,29 +80,13 @@ class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
                                   offset: Offset(0, 3),
                                   blurRadius: 10)
                             ],
-                            // border: Border.all(color: Colors.black),
                             color: Colors.white),
-                        // child: PlacesAutocompleteField(
-                        //   apiKey: "AIzaSyAKfLk1_5MZWMTugH__e2u2YB-g6P8lgRQ",
-                        //   language: "en",
-                        //   // leading: Icon(Icons.search),
-                        //   hint: "Search Here",
-
-                        //   controller: searchController,
-                        //   inputDecoration: const InputDecoration(
-                        //     prefixIcon: Icon(Icons.search),
-                        //     border: InputBorder.none,
-                        //     // hintText: "Search Here",
-                        //     // contentPadding: EdgeInsets.all(10),
-                        //   ),
-                        // ),
                         child: TextField(
                           controller: searchController,
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.search),
                             border: InputBorder.none,
                             hintText: "Search Here",
-                            // contentPadding: EdgeInsets.all(10),
                           ),
                         ),
                       ),
