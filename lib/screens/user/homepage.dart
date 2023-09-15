@@ -8,6 +8,7 @@ import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/db.dart';
+import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,10 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Widget> pages = const [
-    RaiseIncidentPage(
-      latitude: 0,
-      longitude: 0,
-    ),
+    RegisterDisasterScreen(),
     CommunityPage(),
     AlertPage(),
     TipsPage(),
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<String> pagetitle = [
-    "Raise Incident",
+    "Register Disaster",
     "Community",
     "Alerts",
     "Tips",
