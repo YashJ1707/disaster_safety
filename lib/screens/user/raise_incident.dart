@@ -153,6 +153,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       onpress: () async {
                         String? uid = await SecureStorage().getUserId();
                         Incident incident = Incident(null,
+                            id: "",
                             incidentType: selectedIncident,
                             incidentPriority: selectedPriority,
                             reportedDate: DateTime.now().toUtc(),
@@ -160,7 +161,8 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                             latitude: widget.latitude,
                             description: _description.text,
                             reportedBy: "reportedBy",
-                            isApproved: false);
+                            isApproved: false,
+                            isOpen: true);
                         try {
                           await DbMethods().raiseIncident(incident);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
