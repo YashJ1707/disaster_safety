@@ -24,7 +24,7 @@ class DbMethods {
     );
   }
 
-  Future<List<Alerts>> getAlerts(){
-    
-  }
+  // Future<List<Alerts>> getAlerts(){
+
+  // }
 }
