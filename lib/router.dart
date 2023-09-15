@@ -11,11 +11,12 @@ class Routes {
   }
 
   static Future<void> pushReplace(BuildContext context, Widget child) {
-    return Navigator.pushReplacement(
+    return Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: ((context) => child),
       ),
+      (route) => false,
     );
   }
 

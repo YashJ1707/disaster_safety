@@ -39,6 +39,13 @@ class Loadings {
       },
     );
   }
+
+  static Widget staticLoader() {
+    return const SpinKitThreeBounce(
+      color: Consts.kprimary,
+      size: 50.0,
+    );
+  }
 }
 
 

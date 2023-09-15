@@ -1,4 +1,8 @@
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/dept/add_alert.dart';
+import 'package:disaster_safety/screens/dept/check_status.dart';
+import 'package:disaster_safety/screens/dept/pending_requests.dart';
+import 'package:disaster_safety/screens/dept/reports.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/user/community_page.dart';
@@ -7,52 +11,40 @@ import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
 import 'package:disaster_safety/services/auth.dart';
-import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/shared/buttons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class DeptHome extends StatefulWidget {
+  DeptHome({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<DeptHome> createState() => _DeptHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  List<Widget> pages = const [
-    RaiseIncidentPage(),
-    CommunityPage(),
-    AlertPage(),
-    TipsPage(),
-    UpdatesPage(),
-    SettingsPage()
+class _DeptHomeState extends State<DeptHome> {
+  List<Widget> pages = [
+    AddAlerts(),
+    PendingRequests(),
+    StatusPage(),
+    ReportsPage(),
   ];
-
   List<String> pagetitle = [
-    "Raise Incident",
-    "Community",
-    "Alerts",
-    "Tips",
-    "Updates",
-    "Settings"
+    "Add Alert",
+    "Pending Request",
+    "Status Page",
+    "Reports",
   ];
 
   List<IconData> pageIcons = [
-    Icons.new_label,
-    Icons.group_add,
-    Icons.warning_outlined,
-    Icons.tips_and_updates,
-    Icons.update,
-    Icons.settings,
+    Icons.edit_calendar_rounded,
+    Icons.pending_actions_rounded,
+    Icons.update_sharp,
+    Icons.file_copy
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of(context).
-    // String username =  SecureStorage().getUserId();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Welcome "),

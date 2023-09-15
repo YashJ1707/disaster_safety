@@ -7,21 +7,18 @@ import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
 import 'package:disaster_safety/services/auth.dart';
-import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/shared/buttons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class AdminHome extends StatefulWidget {
+  AdminHome({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AdminHome> createState() => _AdminHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AdminHomeState extends State<AdminHome> {
   List<Widget> pages = const [
     RaiseIncidentPage(),
     CommunityPage(),
@@ -55,7 +52,7 @@ class _HomePageState extends State<HomePage> {
     // String username =  SecureStorage().getUserId();
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome "),
+          title: const Text("Welcome Admin"),
           actions: [
             IconButton(
               onPressed: () async {

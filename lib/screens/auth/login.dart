@@ -1,6 +1,9 @@
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/admin/home.dart';
 import 'package:disaster_safety/screens/auth/sign_up.dart';
+import 'package:disaster_safety/screens/dept/home.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:disaster_safety/shared/text_field.dart';
@@ -69,13 +72,35 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.of(_keyLoader.currentContext!,
                                 rootNavigator: true)
                             .pop();
-                        Routes.pushReplace(context, HomePage());
+
+                        //get user role
+
+                        String? userRole = await DbMethods()
+                            .getRole(FirebaseAuth.instance.currentUser!.uid);
+                        print("userorle ${userRole}");
+                        switch (userRole) {
+                          case "user":
+                            Routes.pushReplace(context, HomePage());
+                            break;
+                          case "dept":
+                            Routes.pushReplace(context, DeptHome());
+                            break;
+                          case "admin":
+                            Routes.pushReplace(context, AdminHome());
+                            break;
+                          default:
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Error !! Please try later")));
+                        }
                       }
                     } catch (e) {
+                      // Navigator.of(_keyLoader.currentContext!,
+                      //         rootNavigator: true)
+                      //     .pop();
                       Navigator.of(_keyLoader.currentContext!,
                               rootNavigator: true)
                           .pop();
-                    } finally {}
+                    }
                   }),
               const SizedBox(
                 height: 15,

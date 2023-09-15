@@ -78,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     try {
                       Map<String, dynamic> data = {
                         "name": _nameController.text.toString(),
-                        "email": _emailController.text.toString(),
+                        "useremail": _emailController.text.toString(),
                         "role": selectedRole,
                         "passw": _passController.text.toString(),
                       };
@@ -99,10 +99,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     } catch (e) {
                       print(e);
                     } finally {
-                        Navigator.of(_keyLoader.currentContext!,
-                                rootNavigator: true)
-                            .pop();
-                      }
+                      Navigator.of(_keyLoader.currentContext!,
+                              rootNavigator: true)
+                          .pop();
+                    }
                   }),
               Padding(
                 padding: const EdgeInsets.all(8.0),
