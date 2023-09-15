@@ -1,12 +1,9 @@
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/user/HelpDesk.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
-import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
-import 'package:disaster_safety/services/auth.dart';
-import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> pages = const [
+  List<Widget> pages = [
     RegisterDisasterScreen(),
-    CommunityPage(),
     AlertPage(),
     TipsPage(),
     UpdatesPage(),
@@ -31,7 +27,6 @@ class _HomePageState extends State<HomePage> {
 
   List<String> pagetitle = [
     "Register Disaster",
-    "Community",
     "Alerts",
     "Tips",
     "Updates",
