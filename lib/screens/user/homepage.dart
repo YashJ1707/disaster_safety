@@ -16,7 +16,10 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   List<Widget> pages = const [
-    RaiseIncidentPage(),
+    RaiseIncidentPage(
+      latitude: 0,
+      longitude: 0,
+    ),
     CommunityPage(),
     AlertPage(),
     TipsPage(),

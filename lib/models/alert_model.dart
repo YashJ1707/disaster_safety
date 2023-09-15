@@ -10,15 +10,6 @@ class AlertModel {
       required this.subtitle,
       required this.tag});
 
-  // // factory UserModel.fromJson(Map<String, dynamic> json) {
-  //   return UserModel(
-  //     id: json['id'],
-  //     name: json['name'],
-  //     email: json['email'],
-  //     role: json['role'],
-  //   );
-  // }
-
   factory AlertModel.fromJson(Map<String, dynamic> json) {
     return AlertModel(
         id: json['id'],
