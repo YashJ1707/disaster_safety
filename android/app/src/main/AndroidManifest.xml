@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
     <application
         android:label="disaster_safety"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAKfLk1_5MZWMTugH__e2u2YB-g6P8lgRQ" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
