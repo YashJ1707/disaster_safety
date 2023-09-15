@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               BtnPrimary(
                   title: "Login",
+                  txtColor: Consts.kblack,
                   onpress: () async {
                     //  sign in code
                   }),
@@ -54,7 +55,10 @@ class _LoginPageState extends State<LoginPage> {
               BtnPrimary(
                   bgColor: Consts.kprimary,
                   title: "Continue with Google",
+                  txtColor: Consts.kblack,
+
                   onpress: () async {
+
                     // await context.read<AuthMethods>().signInWithGoogle();
                     // FirebaseAuth.instance
                     //     .authStateChanges()

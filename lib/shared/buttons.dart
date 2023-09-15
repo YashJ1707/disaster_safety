@@ -1,4 +1,3 @@
-
 import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +87,10 @@ class BtnText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextButton(
         onPressed: onpress,
-        child: Text(title),
+        child: Text(
+          title,
+          style: TextStyle(color: Consts.kblack),
+        ),
       ),
     );
   }

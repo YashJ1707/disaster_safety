@@ -1,3 +1,5 @@
+import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/text_styles.dart';
@@ -15,6 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _cpassController = TextEditingController();
@@ -60,6 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               BtnPrimary(
                   title: "SIGN UP",
+                  txtColor: Consts.kblack,
                   onpress: () async {
                     String username = _emailController.text.toString();
                     String pass = _passController.text.toString();
@@ -67,6 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       "name": _nameController.text.toString(),
                       "email": _emailController.text.toString(),
                       "mobile": _mobileController.text.toString(),
+                      "role": _roleController.text.toString(),
                       "passw": pass,
                     };
                   }),
@@ -82,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     BtnText(
                         title: "Login",
                         onpress: () {
-                          // Rute.pushReplace(context, const LoginPage());
+                          Routes.push(context, LoginPage());
                         }),
                   ],
                 ),
