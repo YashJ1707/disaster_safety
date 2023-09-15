@@ -89,23 +89,6 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                     : Container(),
                 const SizedBox(height: 20),
                 const Text(
-                  'Select Responsible department:',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 16),
-                ),
-                CustomDropdown(
-                  options: govAuthorities,
-                  selectedValue: selectedAuthority,
-                  onChanged: (String? newValue) {
-                    setState(
-                      () {
-                        selectedAuthority = newValue!;
-                      },
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                const Text(
                   'Select Priority of incident:',
                   textAlign: TextAlign.start,
                   style: TextStyle(fontSize: 16),
@@ -130,7 +113,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                   hint: "enter additional information",
                   label: "Description",
                 ),
-              const  SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -141,7 +124,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       onpress: () {
                         Routes.pop(context);
                       },
-                      bgColor: Consts.klight,
+                      bgColor: Consts.klight2,
                       txtColor: Consts.kblack,
                       width: width * 0.33,
                     ),
@@ -151,6 +134,9 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       txtColor: Consts.kwhite,
                       bgColor: Consts.kprimary,
                       onpress: () async {
+                        // TODO: Other Incident Type
+                        // TODO: UI Fix
+                        // TODO: Location proper routing
                         String? uid = await SecureStorage().getUserId();
                         Incident incident = Incident(null,
                             id: "",
@@ -160,7 +146,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                             longitude: widget.longitude,
                             latitude: widget.latitude,
                             description: _description.text,
-                            reportedBy: "reportedBy",
+                            reportedBy: uid!,
                             isApproved: false,
                             isOpen: true);
                         try {
@@ -173,7 +159,8 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                                       widget.longitude.toString())));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                             const SnackBar(content: Text("Failed to register")));
+                              const SnackBar(
+                                  content: Text("Failed to register")));
                         }
                       },
                     ),

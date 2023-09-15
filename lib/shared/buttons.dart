@@ -89,7 +89,7 @@ class BtnText extends StatelessWidget {
         onPressed: onpress,
         child: Text(
           title,
-          style: TextStyle(color: Consts.kblack),
+          style: TextStyle(color: Consts.kblack, fontSize: 18),
         ),
       ),
     );
@@ -191,6 +191,7 @@ class PageBtn extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 48,
+                  color: Consts.kprimary,
                 ),
               ),
               SizedBox(height: 10.0),

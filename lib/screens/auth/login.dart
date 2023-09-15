@@ -40,10 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(8.0),
                 child: Text("WELCOME BACK !!"),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Text("Login"),
-              ),
+
               Tinput(
                   hint: "Enter username",
                   label: "Username",

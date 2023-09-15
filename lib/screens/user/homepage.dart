@@ -1,4 +1,5 @@
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/user/HelpDesk.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
@@ -23,7 +24,8 @@ class _HomePageState extends State<HomePage> {
     AlertPage(),
     TipsPage(),
     UpdatesPage(),
-    SettingsPage()
+    SettingsPage(),
+    HelpDesk(),
   ];
 
   List<String> pagetitle = [
@@ -31,7 +33,8 @@ class _HomePageState extends State<HomePage> {
     "Alerts",
     "Tips",
     "Updates",
-    "Settings"
+    "Settings",
+    "Help Desk"
   ];
 
   List<IconData> pageIcons = [
@@ -40,6 +43,7 @@ class _HomePageState extends State<HomePage> {
     Icons.tips_and_updates,
     Icons.update,
     Icons.settings,
+    Icons.call,
   ];
 
   @override
