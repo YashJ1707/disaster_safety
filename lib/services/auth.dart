@@ -125,11 +125,9 @@ class AuthMethods {
         'username': _username,
         'useremail': email.trim(),
         'displayname': fullname.trim(),
-        'followerList': {},
         'address': '',
         'gender': '',
         'mobileNumber': '',
-        'privacy': "Everyone",
       };
       FirebaseFirestore.instance
           .collection('users')

@@ -1,3 +1,5 @@
+import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/auth/sign_up.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               BtnText(
                   title: "Create New Account",
                   onpress: () {
-                    // Rute.pushReplace(context, const SignUpPage());
+                    Routes.push(context, SignUpPage());
                   })
             ],
           ),

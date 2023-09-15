@@ -4,13 +4,14 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- setting up project and running
 
-A few resources to get you started if this is your first Flutter project:
+  - flutter pub get
+  - flutter run / directly use run button
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- project structure
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Navigation.
+
+- To navigate to any page use function in `router.dart` file.
+- eg. navigating `LoginPage()` class. ``Routes.push(context, SignUpPage());`
