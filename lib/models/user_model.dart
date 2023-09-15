@@ -1,13 +1,17 @@
 class UserModel {
   int? id;
-  String? name;
-  String? email;
+  String name;
+  String email;
+  String lat;
+  String long;
   String? role;
 
   UserModel(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.email,
+      required this.lat,
+      required this.long,
       required this.role});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +20,8 @@ class UserModel {
       name: json['name'],
       email: json['email'],
       role: json['role'],
+      lat: json['lat'],
+      long: json['long'],
     );
   }
 }
