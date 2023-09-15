@@ -27,7 +27,6 @@ class _HomePageState extends State<HomePage> {
       latitude: 0,
       longitude: 0,
     ),
-    CommunityPage(),
     AlertPage(),
     TipsPage(),
     UpdatesPage(),
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage> {
 
   List<String> pagetitle = [
     "Raise Incident",
-    "Community",
     "Alerts",
     "Tips",
     "Updates",
@@ -45,7 +43,6 @@ class _HomePageState extends State<HomePage> {
 
   List<IconData> pageIcons = [
     Icons.new_label,
-    Icons.group_add,
     Icons.warning_outlined,
     Icons.tips_and_updates,
     Icons.update,
