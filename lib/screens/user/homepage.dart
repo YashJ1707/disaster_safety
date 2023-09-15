@@ -1,7 +1,5 @@
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
-import 'package:disaster_safety/screens/auth/login.dart';
-import 'package:disaster_safety/screens/user/community_page.dart';
 import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
@@ -10,10 +8,7 @@ import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -43,7 +38,6 @@ class _HomePageState extends State<HomePage> {
 
   List<IconData> pageIcons = [
     Icons.new_label,
-    Icons.group_add,
     Icons.warning_outlined,
     Icons.tips_and_updates,
     Icons.update,
@@ -56,19 +50,7 @@ class _HomePageState extends State<HomePage> {
     // String username =  SecureStorage().getUserId();
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome "),
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await context.read<AuthMethods>().signOut();
-
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              },
-              icon: Icon(Icons.logout),
-            )
-          ],
+          title: const Text("Welcome"),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),

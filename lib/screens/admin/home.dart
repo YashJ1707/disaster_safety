@@ -19,7 +19,7 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  List<Widget> pages = const [
+  List<Widget> pages =  [
     RaiseIncidentPage(
       latitude: 0,
       longitude: 0,
