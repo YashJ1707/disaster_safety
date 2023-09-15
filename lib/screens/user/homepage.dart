@@ -23,7 +23,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Widget> pages = const [
-    RaiseIncidentPage(),
+    RaiseIncidentPage(
+      latitude: 0,
+      longitude: 0,
+    ),
     CommunityPage(),
     AlertPage(),
     TipsPage(),

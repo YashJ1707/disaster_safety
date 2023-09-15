@@ -1,3 +1,4 @@
+import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
@@ -5,11 +6,14 @@ import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RaiseIncidentPage extends StatefulWidget {
-  const RaiseIncidentPage({super.key});
+  const RaiseIncidentPage(
+      {super.key, required this.latitude, required this.longitude});
+
+  final double latitude;
+  final double longitude;
 
   @override
   State<RaiseIncidentPage> createState() => _RaiseIncidentPageState();
@@ -149,19 +153,23 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       bgColor: Consts.kprimary,
                       onpress: () async {
                         String? uid = await SecureStorage().getUserId();
-                        Map<String, dynamic> data = {
-                          "approval_status": "pending",
-                          "description": _description.text,
-                          "incident_type": selectedIncident,
-                          "priority": selectedPriority,
-                          "raised_by": uid,
-                          "time_raised": DateTime.now(),
-                        };
+                        Incident incident = Incident(null,
+                            incidentType: selectedIncident,
+                            incidentPriority: selectedPriority,
+                            reportedDate: DateTime.now().toUtc(),
+                            longitude: widget.longitude,
+                            latitude: widget.latitude,
+                            description: _description.text,
+                            reportedBy: "reportedBy",
+                            isApproved: false);
                         try {
-                          await DbMethods().raiseIncident(data);
+                          await DbMethods().raiseIncident(incident);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                  "Incident Raised and pending for approval")));
+                                  "Incident Raised and pending for approval" +
+                                      widget.latitude.toString() +
+                                      " " +
+                                      widget.longitude.toString())));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Failed to register")));

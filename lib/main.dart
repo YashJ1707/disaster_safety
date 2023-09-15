@@ -1,10 +1,8 @@
 import 'package:disaster_safety/firebase_options.dart';
-import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
-import 'package:disaster_safety/services/maps/maps_screen.dart';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
-
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,11 +24,11 @@ void main() async {
     Provider<AuthMethods>(
       create: (context) => AuthMethods(FirebaseAuth.instance),
     ),
-  ], child: const MyApp()));
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class AuthStatusPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == null) {
             // if(snpashot.data )
-            return LoginPage();
+            return const RegisterDisasterScreen();
           } else {
             return HomePage();
           }
