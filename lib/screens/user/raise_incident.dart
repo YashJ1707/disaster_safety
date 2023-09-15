@@ -1,3 +1,4 @@
+import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
@@ -152,18 +153,17 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       bgColor: Consts.kprimary,
                       onpress: () async {
                         String? uid = await SecureStorage().getUserId();
-                        Map<String, dynamic> data = {
-                          "approval_status": "pending",
-                          "description": _description.text,
-                          "incident_type": selectedIncident,
-                          "priority": selectedPriority,
-                          "raised_by": uid,
-                          "time_raised": DateTime.now(),
-                          "latitude": widget.latitude,
-                          "longitude": widget.longitude,
-                        };
+                        Incident incident = Incident(null,
+                            incidentType: selectedIncident,
+                            incidentPriority: selectedPriority,
+                            reportedDate: DateTime.now().toUtc(),
+                            longitude: widget.longitude,
+                            latitude: widget.latitude,
+                            description: _description.text,
+                            reportedBy: "reportedBy",
+                            isApproved: false);
                         try {
-                          await DbMethods().raiseIncident(data);
+                          await DbMethods().raiseIncident(incident);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                                   "Incident Raised and pending for approval" +
