@@ -58,7 +58,7 @@ class MapsScreenState extends State<MapsScreen> {
 Set<Marker> getMarkers(List<Incident> incidents) {
   Set<Marker> markers = {};
   for (Incident incident in incidents) {
-    if (!incident.isApproved) continue;
+    if (!incident.isApproved || !incident.isOpen) continue;
     Marker m = Marker(
       icon: BitmapDescriptor.defaultMarker,
       markerId: MarkerId(incident.latitude.toString()),
