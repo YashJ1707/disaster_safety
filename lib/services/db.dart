@@ -34,6 +34,40 @@ class DbMethods {
     }
   }
 
+  Future<List<Incident>> getPendingIncidents() async {
+    QuerySnapshot<Object?> snapshot =
+        await incidentRef.where('is_approved', isEqualTo: false).get();
+    List<Incident> incidents = [];
+    if (snapshot.docs.isNotEmpty) {
+      for (var element in snapshot.docs) {
+        Map<String, dynamic> d = {};
+        d = element.data() as Map<String, dynamic>;
+        incidents.add(Incident.fromJson(d));
+      }
+      return incidents;
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<Incident>> getIncidentsForUser() async {
+    final String? userId = await storage.getUserId();
+
+    QuerySnapshot<Object?> snapshot =
+        await incidentRef.where("id", isEqualTo: userId).get();
+    List<Incident> incidents = [];
+    if (snapshot.docs.isNotEmpty) {
+      for (var element in snapshot.docs) {
+        Map<String, dynamic> d = {};
+        d = element.data() as Map<String, dynamic>;
+        incidents.add(Incident.fromJson(d));
+      }
+      return incidents;
+    } else {
+      return [];
+    }
+  }
+
   Future<void> raiseIncident(Incident incident) async {
     try {
       await incidentRef.add(incident.toJson()).then((value) => {

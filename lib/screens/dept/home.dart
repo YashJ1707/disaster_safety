@@ -5,12 +5,9 @@ import 'package:disaster_safety/screens/dept/pending_requests.dart';
 import 'package:disaster_safety/screens/dept/reports.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
-import 'package:disaster_safety/screens/user/community_page.dart';
-import 'package:disaster_safety/screens/user/raise_incident.dart';
-import 'package:disaster_safety/screens/user/settings_page.dart';
-import 'package:disaster_safety/screens/user/tips_page.dart';
-import 'package:disaster_safety/screens/user/updates_page.dart';
 import 'package:disaster_safety/services/auth.dart';
+import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
+import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,20 +21,29 @@ class DeptHome extends StatefulWidget {
 
 class _DeptHomeState extends State<DeptHome> {
   List<Widget> pages = [
+    RegisterDisasterScreen(),
     AddAlerts(),
+    MapsScreen(),
+    AlertPage(),
     PendingRequests(),
     StatusPage(),
     ReportsPage(),
   ];
   List<String> pagetitle = [
+    "Register Disaster",
     "Add Alert",
-    "Pending Request",
+    "Show Map",
+    "Alerts",
+    "Approve Requests",
     "Status Page",
     "Reports",
   ];
 
   List<IconData> pageIcons = [
+    Icons.new_label,
     Icons.edit_calendar_rounded,
+    Icons.map,
+    Icons.warning,
     Icons.pending_actions_rounded,
     Icons.update_sharp,
     Icons.file_copy
