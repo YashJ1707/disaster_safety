@@ -33,13 +33,10 @@ class AuthMethods {
       try {
         UserCredential firebaseUser =
             await FirebaseAuth.instance.signInWithCredential(credential);
-        print("stage 1");
-        if (firebaseUser != null) {
-          // settings firebase
-          // setting loggin persistant
-          print("stage 2");
+
+        if (firebaseUser.user != null) {
           String uid = firebaseUser.user!.uid;
-          print(uid);
+
           await SecureStorage().setUserId(uid);
 
           // Check is already sign up
@@ -82,13 +79,12 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
-      if (user != null) {
+      if (user.user != null) {
         await SecureStorage().setUserId(user.user!.uid);
         await SecureStorage().setUsername(email);
       }
       return user;
     } on FirebaseAuthException catch (e) {
-   
       switch (e.code) {
         case "wrong-password":
           ScaffoldMessenger.of(context).showSnackBar(
