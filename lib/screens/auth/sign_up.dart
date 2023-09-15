@@ -80,9 +80,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         "name": _nameController.text.toString(),
                         "useremail": _emailController.text.toString(),
                         "role": selectedRole,
-                        "passw": _passController.text.toString(),
                       };
-                      print(data);
+
                       UserCredential? user = await context
                           .read<AuthMethods>()
                           .signUp(
@@ -92,17 +91,20 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       if (user != null) {
                         // add records into database
+                        data['uid'] = user.user!.uid;
                         await DbMethods().signUp(data);
                         // navigate to login page
+                        Navigator.of(_keyLoader.currentContext!,
+                                rootNavigator: true)
+                            .pop();
                         Routes.push(context, LoginPage());
                       }
                     } catch (e) {
                       print(e);
-                    } finally {
                       Navigator.of(_keyLoader.currentContext!,
                               rootNavigator: true)
                           .pop();
-                    }
+                    } 
                   }),
               Padding(
                 padding: const EdgeInsets.all(8.0),

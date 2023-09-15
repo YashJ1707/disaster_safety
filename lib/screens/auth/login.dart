@@ -37,11 +37,11 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text("WELCOME BACK !!"),
               ),
               const Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Text("Login"),
               ),
               Tinput(
@@ -77,12 +77,12 @@ class _LoginPageState extends State<LoginPage> {
 
                         String? userRole = await DbMethods()
                             .getRole(FirebaseAuth.instance.currentUser!.uid);
-                        print("userorle ${userRole}");
+
                         switch (userRole) {
                           case "user":
                             Routes.pushReplace(context, HomePage());
                             break;
-                          case "dept":
+                          case "local_body":
                             Routes.pushReplace(context, DeptHome());
                             break;
                           case "admin":
@@ -105,31 +105,31 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 15,
               ),
-              BtnPrimary(
-                  bgColor: Consts.klight,
-                  title: "Continue with Google",
-                  txtColor: Consts.kblack,
-                  onpress: () async {
-                    await context.read<AuthMethods>().signInWithGoogle();
-                    FirebaseAuth.instance
-                        .authStateChanges()
-                        .listen((User? user) {
-                      if (user != null) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("Failed login"),
-                          ),
-                        );
-                      }
-                    });
-                  }),
+              // BtnPrimary(
+              //     bgColor: Consts.klight,
+              //     title: "Continue with Google",
+              //     txtColor: Consts.kblack,
+              //     onpress: () async {
+              //       await context.read<AuthMethods>().signInWithGoogle();
+              //       FirebaseAuth.instance
+              //           .authStateChanges()
+              //           .listen((User? user) {
+              //         if (user != null) {
+              //           Navigator.pushReplacement(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => HomePage(),
+              //             ),
+              //           );
+              //         } else {
+              //           ScaffoldMessenger.of(context).showSnackBar(
+              //             SnackBar(
+              //               content: Text("Failed login"),
+              //             ),
+              //           );
+              //         }
+              //       });
+              //     }),
               const SizedBox(
                 height: 15,
               ),

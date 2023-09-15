@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> pages = const [
+  List<Widget> pages = [
     RaiseIncidentPage(
       latitude: 0,
       longitude: 0,
@@ -58,19 +58,7 @@ class _HomePageState extends State<HomePage> {
     // String username =  SecureStorage().getUserId();
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome "),
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await context.read<AuthMethods>().signOut();
-
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              },
-              icon: Icon(Icons.logout),
-            )
-          ],
+          title: const Text("Welcome"),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),

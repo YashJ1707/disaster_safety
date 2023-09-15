@@ -88,8 +88,7 @@ class AuthMethods {
       }
       return user;
     } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
+   
       switch (e.code) {
         case "wrong-password":
           ScaffoldMessenger.of(context).showSnackBar(

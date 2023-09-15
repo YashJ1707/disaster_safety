@@ -20,9 +20,9 @@ class RaiseIncidentPage extends StatefulWidget {
 }
 
 class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
-  TextEditingController _incidentType = TextEditingController();
-  TextEditingController _description = TextEditingController();
-  TextEditingController _location = TextEditingController();
+  final TextEditingController _incidentType = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _location = TextEditingController();
 
   String selectedIncident = "flood"; // Initial selected value
   String selectedAuthority =
@@ -48,12 +48,12 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: Text("Raise Incident")),
+      appBar: AppBar(title: const Text("Raise Incident")),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
             child: Form(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,6 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                   options: incidentTypes,
                   selectedValue: selectedIncident,
                   onChanged: (String? newValue) {
-                    print(newValue);
                     setState(
                       () {
                         selectedIncident = newValue!;
@@ -131,7 +130,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                   hint: "enter additional information",
                   label: "Description",
                 ),
-                SizedBox(
+              const  SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -172,7 +171,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                                       widget.longitude.toString())));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Failed to register")));
+                             const SnackBar(content: Text("Failed to register")));
                         }
                       },
                     ),
