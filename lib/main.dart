@@ -1,6 +1,7 @@
 import 'package:disaster_safety/firebase_options.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
+import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/maps/maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
@@ -56,7 +57,7 @@ class AuthStatusPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == null) {
             // if(snpashot.data )
-            return LoginPage();
+            return RegisterDisasterScreen();
           } else {
             return HomePage();
           }

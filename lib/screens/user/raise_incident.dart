@@ -5,11 +5,14 @@ import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
 import 'package:disaster_safety/shared/text_field.dart';
 import 'package:disaster_safety/shared/themes.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RaiseIncidentPage extends StatefulWidget {
-  const RaiseIncidentPage({super.key});
+  const RaiseIncidentPage(
+      {super.key, required this.latitude, required this.longitude});
+
+  final double latitude;
+  final double longitude;
 
   @override
   State<RaiseIncidentPage> createState() => _RaiseIncidentPageState();
@@ -156,12 +159,17 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                           "priority": selectedPriority,
                           "raised_by": uid,
                           "time_raised": DateTime.now(),
+                          "latitude": widget.latitude,
+                          "longitude": widget.longitude,
                         };
                         try {
                           await DbMethods().raiseIncident(data);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                  "Incident Raised and pending for approval")));
+                                  "Incident Raised and pending for approval" +
+                                      widget.latitude.toString() +
+                                      " " +
+                                      widget.longitude.toString())));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Failed to register")));
