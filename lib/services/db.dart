@@ -54,7 +54,7 @@ class DbMethods {
     final String? userId = await storage.getUserId();
 
     QuerySnapshot<Object?> snapshot =
-        await incidentRef.where("id", isEqualTo: userId).get();
+        await incidentRef.where("reported_by", isEqualTo: userId).get();
     List<Incident> incidents = [];
     if (snapshot.docs.isNotEmpty) {
       for (var element in snapshot.docs) {

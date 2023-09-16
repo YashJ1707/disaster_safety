@@ -1,4 +1,5 @@
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/dept/active_incidents.dart';
 import 'package:disaster_safety/screens/dept/add_alert.dart';
 import 'package:disaster_safety/screens/dept/check_status.dart';
 import 'package:disaster_safety/screens/dept/pending_requests.dart';
@@ -26,6 +27,7 @@ class _DeptHomeState extends State<DeptHome> {
     MapsScreen(),
     AlertPage(),
     PendingRequests(),
+    ActiveIncidents(),
     StatusPage(),
     ReportsPage(),
   ];
@@ -35,6 +37,7 @@ class _DeptHomeState extends State<DeptHome> {
     "Show Map",
     "Alerts",
     "Approve Requests",
+    "All Incidets",
     "Status Page",
     "Reports",
   ];
@@ -45,6 +48,7 @@ class _DeptHomeState extends State<DeptHome> {
     Icons.map,
     Icons.warning,
     Icons.pending_actions_rounded,
+    Icons.ads_click,
     Icons.update_sharp,
     Icons.file_copy
   ];

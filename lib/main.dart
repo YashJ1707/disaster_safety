@@ -76,7 +76,6 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   @override
   Widget build(BuildContext context) {
-    PushNotificationService().getToken();
-    return HomePage();
+    return DeptHome();
   }
 }
