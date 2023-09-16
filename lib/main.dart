@@ -1,8 +1,10 @@
 import 'package:disaster_safety/firebase_options.dart';
 import 'package:disaster_safety/models/incident_model.dart';
+import 'package:disaster_safety/screens/admin/home.dart';
+import 'package:disaster_safety/screens/dept/home.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
-import 'package:disaster_safety/services/maps/maps_screen.dart';
+import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,7 +60,7 @@ class AuthStatusPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == null) {
             // if(snpashot.data )
-            return const RegisterDisasterScreen();
+            return HomePage();
           } else {
             return HomePage();
           }

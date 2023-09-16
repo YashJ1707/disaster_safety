@@ -19,6 +19,7 @@ class Incident {
   String reportedBy;
   bool isApproved;
   String? approvedBy;
+  String? imgpath;
   bool isOpen;
 
   Incident(this.approvedBy,
@@ -31,6 +32,7 @@ class Incident {
       required this.description,
       required this.reportedBy,
       required this.isApproved,
+      required this.imgpath,
       required this.isOpen});
 
   factory Incident.fromJson(Map<String, dynamic> json) =>
@@ -44,6 +46,7 @@ class Incident {
           description: json["description"],
           reportedBy: json["reported_by"],
           isApproved: json["is_approved"],
+          imgpath: json["imgpath"],
           isOpen: json['is_open']);
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +60,7 @@ class Incident {
         "reported_by": reportedBy,
         "is_approved": isApproved,
         "approved_by": approvedBy,
+        "imgpath": imgpath,
         "is_open": isOpen,
       };
 }

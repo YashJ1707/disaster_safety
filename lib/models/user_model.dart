@@ -1,29 +1,27 @@
 class UserModel {
-  final int? id;
+  final String? id;
   final String? name;
   final String? email;
   final String? role;
   final double latitude;
   final double longitude;
 
-  UserModel(
-      {required this.latitude,
-      required this.longitude,
-      required this.id,
-      required this.name,
-      required this.email,
-      required this.role});
+  UserModel({
+    required this.latitude,
+    required this.longitude,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.role,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        id: json['id'],
+        id: json['uid'],
         name: json['name'],
-        email: json['email'],
+        email: json['useremail'],
         role: json['role'],
-        latitude: json['latitude'],
-        longitude: json['longitude']);
+        latitude: json['latitude'] ?? 0,
+        longitude: json['longitude'] ?? 0);
   }
 }
-
-
-// usages
