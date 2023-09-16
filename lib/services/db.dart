@@ -42,7 +42,7 @@ class DbMethods {
       for (var element in snapshot.docs) {
         Map<String, dynamic> d = {};
         d = element.data() as Map<String, dynamic>;
-        incidents.add(Incident.fromJson(d));
+        if (d['is_open'] == true) incidents.add(Incident.fromJson(d));
       }
       return incidents;
     } else {

@@ -160,9 +160,8 @@ Future<Set<Marker>> getMarkers(
       markerId: MarkerId(incident.latitude.toString()),
       position: LatLng(incident.latitude, incident.longitude),
       infoWindow: InfoWindow(
-          title: "Test",
-          snippet:
-              "Reported By: \nReported On: ${incident.reportedDate.toUtc()}",
+          title: incident.incidentType,
+          snippet: "Reported On: ${incident.reportedDate.toUtc()}",
           onTap: () {}),
     );
     markers.add(m);

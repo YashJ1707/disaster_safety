@@ -286,9 +286,6 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                                     content: Text("Failed to register")));
                           }
                         }
-                        Navigator.of(_keyLoader.currentContext!,
-                                rootNavigator: true)
-                            .pop();
                       },
                     ),
                   ],

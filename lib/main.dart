@@ -75,8 +75,16 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
       future: loadinfo(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+<<<<<<< HEAD
+          if (snapshot.data != null) {
+            // if(snpashot.data )
+            return HomePage();
+          } else {
+            return LoginPage();
+=======
           if (userid != null) {
             return userrole == "user" ? HomePage() : DeptHome();
+>>>>>>> origin/master
           }
         }
         return const Center(
