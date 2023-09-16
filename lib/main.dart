@@ -23,7 +23,6 @@ void main() async {
   // FirebaseMessaging.onBackgroundMessage(
   //     PushNotificationService().backgroundHandler);
 
-
   runApp(MultiProvider(providers: [
     StreamProvider(
       initialData: null,
@@ -76,6 +75,18 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DeptHome();
+    return FutureBuilder(
+      future: SecureStorage().getUserId(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            if (snapshot.data != null) {
+              return HomePage();
+            }
+          }
+        }
+        return LoginPage();
+      },
+    );
   }
 }
