@@ -71,19 +71,6 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return FutureBuilder(
-    //   future: loadinfo(),
-    //   builder: (context, snapshot) {
-    //   //   if (snapshot.connectionState == ConnectionState.done) {
-    //   //     if (userid != null) {
-    //   //       userrole == "user" ? HomePage() : DeptHome();
-    //   //     }
-    //   //   }
-    //   //   return const Center(
-    //   //     child: CircularProgressIndicator(),
-    //   //   );
-    //   // },
-    // );
-    return HomePage(); 
+    return HomePage();
   }
 }
