@@ -50,20 +50,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthStatusPage extends StatelessWidget {
-  const AuthStatusPage({super.key});
+class AuthStatusPage extends StatefulWidget {
+  AuthStatusPage({super.key});
+
+  @override
+  State<AuthStatusPage> createState() => _AuthStatusPageState();
+}
+
+class _AuthStatusPageState extends State<AuthStatusPage> {
+  String? userrole;
+
+  String? userid;
+
+  Future<void> loadinfo() async {
+    userrole = await SecureStorage().getUserRole();
+    userid = await SecureStorage().getUserId();
+    // return true;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: SecureStorage().getUserId(),
+      future: loadinfo(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+<<<<<<< HEAD
           if (snapshot.data != null) {
             // if(snpashot.data )
             return HomePage();
           } else {
             return LoginPage();
+=======
+          if (userid != null) {
+            return userrole == "user" ? HomePage() : DeptHome();
+>>>>>>> origin/master
           }
         }
         return const Center(

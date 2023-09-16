@@ -20,8 +20,13 @@ class AlertPage extends StatelessWidget {
           future: DbMethods().getAlerts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              print(snapshot.data?.length);
-              if (snapshot.hasData && snapshot.data?.length != 0) {
+              if (snapshot.hasData) {
+                print(snapshot.data!.length);
+                if (snapshot.data!.length == 0) {
+                  return Center(
+                    child: Text("No Alerst currently"),
+                  );
+                }
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,

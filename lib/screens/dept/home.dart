@@ -53,7 +53,7 @@ class _DeptHomeState extends State<DeptHome> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome "),
+          title: const Text("Welcome"),
           actions: [
             IconButton(
               onPressed: () async {

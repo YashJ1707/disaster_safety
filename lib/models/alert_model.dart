@@ -1,5 +1,5 @@
 class Alert {
-  final String id;
+  final String? id;
   final String title;
   final String subtitle;
   final String tag;
@@ -11,6 +11,7 @@ class Alert {
       required this.tag});
 
   factory Alert.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Alert(
         id: json['id'],
         title: json['title'],
