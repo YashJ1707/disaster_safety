@@ -2,6 +2,8 @@ import 'dart:ffi';
 import 'dart:ui' as ui;
 
 import 'package:disaster_safety/models/incident_model.dart';
+import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/screens/user/incident_info.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/geolocator.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
@@ -60,7 +62,7 @@ class MapsScreenState extends State<MapsScreen> {
               incidents = value;
             },
           ),
-          getMarkers(incidents, "all").then(
+          getMarkers(incidents, "all", context).then(
             (value) {
               setState(() {
                 markers.addAll(value);
@@ -112,7 +114,7 @@ class MapsScreenState extends State<MapsScreen> {
               selectedDisasterType = newValue!;
             });
             Set<Marker> mrkr =
-                await getMarkers(incidents, selectedDisasterType.name);
+                await getMarkers(incidents, selectedDisasterType.name, context);
             mrkr.add(addYourLocationMarker());
             setState(() {
               markers = mrkr;
@@ -148,7 +150,7 @@ Future<Uint8List> getBytesFromAsset(String path, int width) async {
 }
 
 Future<Set<Marker>> getMarkers(
-    List<Incident> incidents, String disaster) async {
+    List<Incident> incidents, String disaster, BuildContext context) async {
   Set<Marker> markers = {};
   for (Incident incident in incidents) {
     if (!incident.isApproved ||
@@ -162,7 +164,9 @@ Future<Set<Marker>> getMarkers(
       infoWindow: InfoWindow(
           title: incident.incidentType,
           snippet: "Reported On: ${incident.reportedDate.toUtc()}",
-          onTap: () {}),
+          onTap: () {
+            Routes.push(context, IncidentInfo(incident: incident));
+          }),
     );
     markers.add(m);
   }
@@ -182,8 +186,8 @@ Future<BitmapDescriptor> getIcon(String incident) async {
       return await getByteIcon("earthquake.png");
     case "landslide":
       return await getByteIcon("landslide.png");
-    case "forestfire":
-      return await getByteIcon("forestfire.png");
+    case "wildfire":
+      return await getByteIcon("wildfire.png");
     default:
       return BitmapDescriptor.defaultMarker;
   }
