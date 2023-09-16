@@ -10,6 +10,13 @@
         <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyAKfLk1_5MZWMTugH__e2u2YB-g6P8lgRQ" />
+        <service
+  android:name="com.example.disaster_safety.PushNotificationService"
+  android:exported="false">
+  <intent-filter>
+    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+  </intent-filter>
+</service>
         <activity
             android:name=".MainActivity"
             android:exported="true"

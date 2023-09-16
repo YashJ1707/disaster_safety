@@ -1,6 +1,7 @@
 import 'package:disaster_safety/models/alert_model.dart';
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/services/db.dart';
+import 'package:disaster_safety/services/push_notification.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
@@ -17,6 +18,8 @@ class AddAlerts extends StatefulWidget {
 }
 
 class _AddAlertsState extends State<AddAlerts> {
+  final PushNotificationService _notificationService =
+      PushNotificationService();
   final TextEditingController _alertTitle = TextEditingController();
 
   final TextEditingController _description = TextEditingController();
@@ -28,6 +31,7 @@ class _AddAlertsState extends State<AddAlerts> {
 
   @override
   Widget build(BuildContext context) {
+      _notificationService.initialize();
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(

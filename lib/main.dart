@@ -7,9 +7,11 @@ import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
+import 'package:disaster_safety/services/push_notification.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // FirebaseMessaging.onBackgroundMessage(
+  //     PushNotificationService().backgroundHandler);
+
 
   runApp(MultiProvider(providers: [
     StreamProvider(
@@ -71,6 +76,7 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   @override
   Widget build(BuildContext context) {
+    PushNotificationService().getToken();
     return HomePage();
   }
 }

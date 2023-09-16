@@ -28,8 +28,8 @@ class IncidentInfo extends StatelessWidget {
                     ? NetworkImage(incident.imgpath!)
                     : NetworkImage(
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/495px-No-Image-Placeholder.svg.png?20200912122019"),
-                width: 100,
-                height: 100,
+                width: 200,
+                height: 400,
               ),
             ),
             // profile_row("Incident Type", incident.),
