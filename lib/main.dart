@@ -5,6 +5,7 @@ import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/dept/home.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/services/push_notification.dart';
@@ -66,23 +67,39 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   String? userid;
 
-  Future<void> loadinfo() async {
-    userrole = await SecureStorage().getUserRole();
+  Future<List<String?>?> loadinfo() async {
+    // userrole = await SecureStorage().getUserRole
+    // ();
     userid = await SecureStorage().getUserId();
+    if (userid != null) {}
+    String? userRole = await DbMethods().getRole(userid);
+
+    if (userid != null && userrole != null) {
+      await SecureStorage().setUserId(null);
+      await SecureStorage().setUsername(null);
+      return [userid, userrole];
+    }
+    return null;
+
     // return true;
-    setState(() {});
+    // setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: SecureStorage().getUserId(),
+      future: loadinfo(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             if (snapshot.data != null) {
-              return HomePage();
+              if (snapshot.data![1] == "user") {
+                return HomePage();
+              } else {
+                return DeptHome();
+              }
             }
+            return LoginPage();
           }
         }
         return LoginPage();

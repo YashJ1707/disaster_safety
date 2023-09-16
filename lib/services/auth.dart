@@ -122,6 +122,8 @@ class AuthMethods {
 
 // Sign out method
   Future<void> signOut() async {
+    await SecureStorage().setUserId(null);
+    await SecureStorage().setUsername(null);
     await _auth.signOut();
   }
 
