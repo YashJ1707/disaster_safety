@@ -31,7 +31,6 @@ class RaiseIncidentPage extends StatefulWidget {
 class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
   final TextEditingController _incidentType = TextEditingController();
   final TextEditingController _description = TextEditingController();
-  final TextEditingController _location = TextEditingController();
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   String selectedIncident = "flood"; // Initial selected value
@@ -43,14 +42,8 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
     "flood",
     "landslide",
     "earthquake",
-    "accident",
-    "other"
-  ];
-  List<String> govAuthorities = [
-    "Local Government Authority",
-    "Police",
-    "Health Department",
-    "other"
+    "wildfire",
+    "tsunami",
   ];
   List<String> priority = ["High", "Medium", "Low"];
 

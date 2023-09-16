@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Provider.of(context).
     // String username =  SecureStorage().getUserId();
-    print(loading);
     return loading == true
         ? Scaffold(body: Loadings.staticLoader())
         : Scaffold(
