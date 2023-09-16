@@ -1,8 +1,10 @@
+import 'dart:ffi';
 import 'dart:ui' as ui;
 
 import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/geolocator.dart';
+import 'package:disaster_safety/shared/dropdown.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +17,25 @@ class MapsScreen extends StatefulWidget {
   State<MapsScreen> createState() => MapsScreenState();
 }
 
+final List<DisasterType> disasterTypes = [
+  DisasterType(name: "All", icon: Icons.info_outline),
+  DisasterType(name: 'Earthquake', icon: Icons.location_on),
+  DisasterType(name: 'Flood', icon: Icons.water_damage),
+  DisasterType(name: 'Wildfire', icon: Icons.fireplace),
+  DisasterType(name: "Landslide", icon: Icons.landslide),
+  DisasterType(name: 'Tsunami', icon: Icons.water_damage),
+];
+DisasterType selectedDisasterType = disasterTypes.first;
+
 class MapsScreenState extends State<MapsScreen> {
+  List<String> incidentTypes = [
+    "all",
+    "flood",
+    "earthquake",
+    "landslide",
+    "tsunami"
+  ];
+  String selectedIncident = "all";
   Set<Marker> markers = {};
   late LatLng location;
   bool loading = true;
@@ -40,7 +60,7 @@ class MapsScreenState extends State<MapsScreen> {
               incidents = value;
             },
           ),
-          getMarkers(incidents).then(
+          getMarkers(incidents, "all").then(
             (value) {
               setState(() {
                 markers.addAll(value);
@@ -62,6 +82,7 @@ class MapsScreenState extends State<MapsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // _controller.
     return Scaffold(
       body: loading == true
           ? Center(child: Loadings.staticLoader())
@@ -72,6 +93,46 @@ class MapsScreenState extends State<MapsScreen> {
               ),
               markers: markers,
             ),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            const BoxShadow(
+                blurRadius: 10, offset: Offset(0, 3), color: Colors.black45)
+          ],
+        ),
+        width: 155,
+        child: DropdownButton<DisasterType>(
+          hint: Text(selectedDisasterType.name),
+          value: selectedDisasterType,
+          onChanged: (DisasterType? newValue) async {
+            setState(() {
+              selectedDisasterType = newValue!;
+            });
+            Set<Marker> mrkr =
+                await getMarkers(incidents, selectedDisasterType.name);
+            mrkr.add(addYourLocationMarker());
+            setState(() {
+              markers = mrkr;
+            });
+          },
+          items: disasterTypes.map((DisasterType disasterType) {
+            return DropdownMenuItem<DisasterType>(
+              value: disasterType,
+              child: Row(
+                children: [
+                  Icon(disasterType.icon),
+                  const SizedBox(width: 8.0),
+                  Text(disasterType.name),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 }
@@ -86,22 +147,23 @@ Future<Uint8List> getBytesFromAsset(String path, int width) async {
       .asUint8List();
 }
 
-Future<Set<Marker>> getMarkers(List<Incident> incidents) async {
+Future<Set<Marker>> getMarkers(
+    List<Incident> incidents, String disaster) async {
   Set<Marker> markers = {};
   for (Incident incident in incidents) {
-    if (!incident.isApproved || !incident.isOpen) continue;
+    if (!incident.isApproved ||
+        !incident.isOpen ||
+        (incident.incidentType != disaster.toLowerCase() &&
+            disaster.toLowerCase() != "all")) continue;
     Marker m = Marker(
       icon: await getIcon(incident.incidentType),
       markerId: MarkerId(incident.latitude.toString()),
       position: LatLng(incident.latitude, incident.longitude),
       infoWindow: InfoWindow(
           title: "Test",
-          snippet: "Reported By: \n" +
-              "Reported On: " +
-              incident.reportedDate.toUtc().toString(),
-          onTap: () {}
-          //TODO: Complete info window
-          ),
+          snippet:
+              "Reported By: \nReported On: ${incident.reportedDate.toUtc()}",
+          onTap: () {}),
     );
     markers.add(m);
   }
@@ -110,7 +172,7 @@ Future<Set<Marker>> getMarkers(List<Incident> incidents) async {
 
 Future<BitmapDescriptor> getByteIcon(String asset) async {
   return BitmapDescriptor.fromBytes(
-      await getBytesFromAsset("assets/" + asset, 90));
+      await getBytesFromAsset("assets/$asset", 90));
 }
 
 Future<BitmapDescriptor> getIcon(String incident) async {
@@ -126,4 +188,14 @@ Future<BitmapDescriptor> getIcon(String incident) async {
     default:
       return BitmapDescriptor.defaultMarker;
   }
+}
+
+class DisasterType {
+  final String name;
+  final IconData icon;
+
+  DisasterType({
+    required this.name,
+    required this.icon,
+  });
 }

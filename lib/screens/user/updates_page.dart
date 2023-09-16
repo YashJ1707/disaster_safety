@@ -1,7 +1,6 @@
 import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/shared/loading.dart';
-import 'package:disaster_safety/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class UpdatesPage extends StatelessWidget {

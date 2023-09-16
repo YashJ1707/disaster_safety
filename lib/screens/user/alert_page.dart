@@ -10,8 +10,8 @@ class AlertPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Alerts "),
-        leading: Icon(Icons.warning),
+        title: const Text("Alerts "),
+        leading: const Icon(Icons.warning),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
@@ -20,7 +20,8 @@ class AlertPage extends StatelessWidget {
           future: DbMethods().getAlerts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData) {
+              print(snapshot.data?.length);
+              if (snapshot.hasData && snapshot.data?.length != 0) {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,
@@ -44,6 +45,15 @@ class AlertPage extends StatelessWidget {
                           trailing: const Icon(Icons.more_vert),
                         ));
                   },
+                );
+              } else {
+                return Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: const Center(
+                      child: Text(
+                    "No Alerts for now check again later",
+                    style: TextStyle(fontSize: 18),
+                  )),
                 );
               }
             }
