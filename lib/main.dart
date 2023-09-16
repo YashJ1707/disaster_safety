@@ -71,6 +71,6 @@ class _AuthStatusPageState extends State<AuthStatusPage> {
 
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    return DeptHome();
   }
 }

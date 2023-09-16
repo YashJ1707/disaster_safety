@@ -43,11 +43,11 @@ class UpdatesPage extends StatelessWidget {
                                   .substring(0, 1)
                                   .toUpperCase() +
                               incident.incidentType.substring(1)),
-                          subtitle: Text(incident.isApproved
-                              ? incident.isOpen
+                          subtitle: Text(incident.isOpen
+                              ? incident.isApproved
                                   ? "Open"
-                                  : "Closed"
-                              : "Not Approved"),
+                                  : "Not Approved"
+                              : "Closed"),
                           trailing: const Icon(Icons.more_vert),
                         ));
                   },
