@@ -1,4 +1,5 @@
 import 'package:disaster_safety/models/incident_model.dart';
+import 'package:disaster_safety/screens/dept/home.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/single_marker_map.dart';
 import 'package:disaster_safety/shared/loading.dart';
@@ -122,7 +123,8 @@ class CustomDialog extends StatelessWidget {
         ElevatedButton(
           onPressed: () async {
             await DbMethods().approveIncident(incident: incident);
-            Navigator.of(context).pop(); // Close the dialog
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => DeptHome())); // Close the dialog
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.green,

@@ -83,7 +83,7 @@ class DbMethods {
       String? userId = await storage.getUserId();
       await incidentRef
           .doc(incident.id)
-          .update({'isApproved': true, 'approvedBy': userId});
+          .update({'is_approved': true, 'approved_by': userId});
     } catch (e) {
       print(e);
     }
@@ -91,7 +91,7 @@ class DbMethods {
 
   Future<void> closeIncident({required Incident incident}) async {
     try {
-      await incidentRef.doc(incident.id).update({'isOpen': false});
+      await incidentRef.doc(incident.id).update({'is_open': false});
     } catch (e) {
       print(e);
     }
@@ -159,7 +159,6 @@ class DbMethods {
           d = element.data() as Map<String, dynamic>;
           user = UserModel.fromJson(d);
         }
-        print(user);
         return user;
       } else {
         return null;

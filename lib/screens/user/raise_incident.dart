@@ -29,10 +29,10 @@ class RaiseIncidentPage extends StatefulWidget {
 }
 
 class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
-  TextEditingController _incidentType = TextEditingController();
-  TextEditingController _description = TextEditingController();
-  TextEditingController _location = TextEditingController();
-  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+  final TextEditingController _incidentType = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _location = TextEditingController();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   String selectedIncident = "flood"; // Initial selected value
   String selectedAuthority =
@@ -57,7 +57,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
   // picking image
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
-  bool _isUploading = false;
+  final bool _isUploading = false;
 
   // Future<void> _getImage(ImageSource source) async {
   //   final pickedFile = await _picker.pickImage(source: source);

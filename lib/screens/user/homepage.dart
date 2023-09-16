@@ -1,9 +1,11 @@
+import 'package:disaster_safety/models/user_model.dart';
 import 'package:disaster_safety/router.dart';
 import 'package:disaster_safety/screens/user/HelpDesk.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
 import 'package:disaster_safety/screens/user/tips_page.dart';
 import 'package:disaster_safety/screens/user/updates_page.dart';
+import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late UserModel user;
   List<Widget> pages = [
     RegisterDisasterScreen(),
     MapsScreen(),
@@ -46,6 +49,18 @@ class _HomePageState extends State<HomePage> {
     Icons.settings,
     Icons.call,
   ];
+  @override
+  void initState() {
+    super.initState();
+
+    DbMethods().loadUserData().then(
+          (value) => setState(
+            () {
+              user = value!;
+            },
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +68,10 @@ class _HomePageState extends State<HomePage> {
     // String username =  SecureStorage().getUserId();
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome"),
+          title: Text(
+            "Welcome ${user.name}",
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
