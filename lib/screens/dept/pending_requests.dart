@@ -114,6 +114,7 @@ class CustomDialog extends StatelessWidget {
           onPressed: () async {
             await DbMethods().closeIncident(incident: incident);
             Navigator.of(context).pop(); // Close the dialog
+            Navigator.of(context).pop(); // Close the dialog
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.red,

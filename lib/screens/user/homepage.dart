@@ -9,6 +9,7 @@ import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/maps/complete_maps_screen.dart';
 import 'package:disaster_safety/services/maps/register_disaster_screen.dart';
 import 'package:disaster_safety/shared/buttons.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late UserModel user;
+
   List<Widget> pages = [
     RegisterDisasterScreen(),
     MapsScreen(),
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage> {
     Icons.settings,
     Icons.call,
   ];
+  bool loading = true;
   @override
   void initState() {
     super.initState();
@@ -57,6 +60,7 @@ class _HomePageState extends State<HomePage> {
           (value) => setState(
             () {
               user = value!;
+              loading = false;
             },
           ),
         );
@@ -66,29 +70,32 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Provider.of(context).
     // String username =  SecureStorage().getUserId();
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Welcome ${user.name}",
-            style: TextStyle(fontWeight: FontWeight.w700),
-          ),
-        ),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: GridView.count(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: ScrollPhysics(),
-              crossAxisCount: 2,
-              children: List.generate(pages.length, (index) {
-                return PageBtn(
-                    title: pagetitle[index],
-                    icon: pageIcons[index],
-                    onpress: () {
-                      Routes.push(context, pages[index]);
-                    },
-                    index: index);
-              })),
-        ));
+    print(loading);
+    return loading == true
+        ? Scaffold(body: Loadings.staticLoader())
+        : Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "Welcome ${user.name}",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            ),
+            body: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              child: GridView.count(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: ScrollPhysics(),
+                  crossAxisCount: 2,
+                  children: List.generate(pages.length, (index) {
+                    return PageBtn(
+                        title: pagetitle[index],
+                        icon: pageIcons[index],
+                        onpress: () {
+                          Routes.push(context, pages[index]);
+                        },
+                        index: index);
+                  })),
+            ));
   }
 }
