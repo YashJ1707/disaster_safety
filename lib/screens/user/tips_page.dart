@@ -1,4 +1,5 @@
 import 'package:disaster_safety/shared/text_styles.dart';
+import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
 
 class TipsPage extends StatelessWidget {
@@ -35,7 +36,10 @@ class TipsPage extends StatelessWidget {
         itemCount: disasters.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            leading: Icon(Icons.ac_unit_outlined),
+            leading: Icon(
+              Icons.ac_unit_outlined,
+              color: Consts.kprimary,
+            ),
             title: Texts.h1(title: disasters[index].name),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

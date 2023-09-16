@@ -1,6 +1,7 @@
 import 'package:disaster_safety/firebase_options.dart';
 import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/screens/admin/home.dart';
+import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/dept/home.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
 import 'package:disaster_safety/services/auth.dart';
@@ -58,11 +59,11 @@ class AuthStatusPage extends StatelessWidget {
       future: SecureStorage().getUserId(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data == null) {
+          if (snapshot.data != null) {
             // if(snpashot.data )
             return HomePage();
           } else {
-            return HomePage();
+            return LoginPage();
           }
         }
         return const Center(

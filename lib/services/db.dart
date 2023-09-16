@@ -208,7 +208,7 @@ class DbMethods {
   }
 
   Future<List<Alert>> getAlerts() async {
-    QuerySnapshot<Object?> snapshot = await resourceRef.get();
+    QuerySnapshot<Object?> snapshot = await alertRef.get();
     List<Alert> alerts = [];
     if (snapshot.docs.isNotEmpty) {
       for (var element in snapshot.docs) {

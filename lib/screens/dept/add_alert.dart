@@ -1,8 +1,11 @@
+import 'package:disaster_safety/models/alert_model.dart';
 import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/services/db.dart';
+import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
 import 'package:disaster_safety/shared/dropdown.dart';
+import 'package:disaster_safety/shared/loading.dart';
 import 'package:disaster_safety/shared/text_field.dart';
-import 'package:disaster_safety/shared/text_styles.dart';
 import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +24,7 @@ class _AddAlertsState extends State<AddAlerts> {
   String selectedTag = "General";
 
   List<String> tagOptions = ["Awareness", "Emergency", "Important", "General"];
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,6 @@ class _AddAlertsState extends State<AddAlerts> {
       appBar: AppBar(
         title: const Text("Add Alert "),
         leading: const Icon(Icons.warning_amber),
-
       ),
       body: SingleChildScrollView(
           child: SafeArea(
@@ -81,8 +84,14 @@ class _AddAlertsState extends State<AddAlerts> {
                   txtColor: Consts.kwhite,
                   bgColor: Consts.kprimary,
                   onpress: () async {
-                    // String? uid = await SecureStorage().getUserId();
-                    // Incident incident = Incident(null,
+                    String? uid = await SecureStorage().getUserId();
+                    Alert alert = Alert(
+                        id: uid,
+                        title: _alertTitle.text,
+                        subtitle: _description.text,
+                        tag: selectedTag);
+
+                    // Incident incidentt = Incident(null,
                     //     incidentType: selectedIncident,
                     //     incidentPriority: selectedPriority,
                     //     reportedDate: DateTime.now().toUtc(),
@@ -92,16 +101,23 @@ class _AddAlertsState extends State<AddAlerts> {
                     //     reportedBy: "reportedBy",
                     //     isApproved: false);
                     try {
+                      Loadings.showLoadingDialog(context, _keyLoader);
+
+                      await DbMethods().createAlert(alert);
+                      Navigator.of(_keyLoader.currentContext!,
+                              rootNavigator: true)
+                          .pop();
+
                       // await DbMethods().raiseIncident(incident);
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //     content: Text(
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Alert Added Successfully")));
                       //         "Incident Raised and pending for approval" +
                       //             widget.latitude.toString() +
                       //             " " +
                       //             widget.longitude.toString())));
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Failed to register")));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Failed to create alert")));
                     }
                   },
                 ),

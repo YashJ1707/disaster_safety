@@ -38,9 +38,19 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("WELCOME BACK !!"),
+                child: Text("WELCOME BACK !"),
               ),
 
+              Container(
+                child: Image(
+                  image: AssetImage("assets/help.png"),
+                  width: 100,
+                  height: 100,
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
               Tinput(
                   hint: "Enter username",
                   label: "Username",
@@ -80,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                             Routes.pushReplace(context, HomePage());
                             break;
                           case "local_body":
+                            print("right case");
                             Routes.pushReplace(context, DeptHome());
+
                             break;
                           case "admin":
                             Routes.pushReplace(context, AdminHome());

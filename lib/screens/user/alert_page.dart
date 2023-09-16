@@ -21,6 +21,12 @@ class AlertPage extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
+                print(snapshot.data!.length);
+                if (snapshot.data!.length == 0) {
+                  return Center(
+                    child: Text("No Alerst currently"),
+                  );
+                }
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,
