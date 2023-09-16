@@ -11,7 +11,7 @@ class IncidentInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Incident Information")),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: SingleChildScrollView(
             child: Column(
           children: [
@@ -19,6 +19,9 @@ class IncidentInfo extends StatelessWidget {
             profile_row("Priority", incident.incidentPriority),
             profile_row("Reported by", incident.reportedBy),
             profile_row("Description", incident.description),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               child: Image(
                 image: incident.imgpath != null
@@ -40,8 +43,8 @@ class IncidentInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Texts.h2(title: label1 + " : "),
-        Texts.h2(title: label2),
+        Text(label1 + " : "),
+        Text(label2),
       ],
     );
   }
