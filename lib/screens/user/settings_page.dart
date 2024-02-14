@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: Container(
+          child: SizedBox(
             width: width * 0.8,
             child: FutureBuilder<UserModel?>(
               future: DbMethods().loadUserData(),
@@ -51,7 +51,7 @@ class SettingsPage extends StatelessWidget {
 
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
+                                  builder: (context) => const LoginPage(),
                                 ),
                                 (route) => false);
                           })
@@ -71,7 +71,7 @@ class SettingsPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Texts.h2(title: label1 + " : "),
+        Texts.h2(title: "$label1 : "),
         Texts.h2(title: label2),
       ],
     );

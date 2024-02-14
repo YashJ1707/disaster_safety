@@ -2,8 +2,10 @@ import 'package:disaster_safety/screens/user/raise_incident.dart';
 import 'package:disaster_safety/services/geolocator.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart' as places;
 
 class RegisterDisasterScreen extends StatefulWidget {
   const RegisterDisasterScreen({super.key});
@@ -13,7 +15,8 @@ class RegisterDisasterScreen extends StatefulWidget {
 }
 
 class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
-  // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
+  final places.GoogleMapsPlaces _places =
+      places.GoogleMapsPlaces(apiKey: "kGoogleApiKey");
 
   bool disabled = true;
   Set<Marker> markers = {};
@@ -81,13 +84,18 @@ class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
                                   blurRadius: 10)
                             ],
                             color: Colors.white),
-                        child: TextField(
-                          controller: searchController,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            border: InputBorder.none,
-                            hintText: "Search Here",
-                          ),
+                        child: PlacesAutocompleteField(
+                          apiKey: "AIzaSyAKfLk1_5MZWMTugH__e2u2YB-g6P8lgRQ",
+                          controller: TextEditingController(),
+                          onSelected: (place) {
+                            print('Selected place: ${place.description}');
+                          },
+                          onChanged: (value) {
+                            // Handle changes in the text field and perform search as the user types
+                            if (value != null && value.length > 3) {
+                              _performSearch(value);
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -118,5 +126,20 @@ class RegisterDisasterScreenState extends State<RegisterDisasterScreen> {
               ],
             ),
     );
+  }
+
+  void _performSearch(String query) async {
+    if (query.isNotEmpty) {
+      final response = await _places.autocomplete(
+        query,
+        language: 'en', // Adjust as needed
+      );
+
+      if (response.isOkay) {
+        // Handle the autocomplete suggestions (response.predictions)
+      } else {
+        // Handle error
+      }
+    }
   }
 }

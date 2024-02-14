@@ -1,4 +1,4 @@
-import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/core/router.dart';
 import 'package:disaster_safety/screens/dept/active_incidents.dart';
 import 'package:disaster_safety/screens/dept/add_alert.dart';
 import 'package:disaster_safety/screens/dept/check_status.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DeptHome extends StatefulWidget {
-  DeptHome({super.key});
+  const DeptHome({super.key});
 
   @override
   State<DeptHome> createState() => _DeptHomeState();
@@ -22,14 +22,14 @@ class DeptHome extends StatefulWidget {
 
 class _DeptHomeState extends State<DeptHome> {
   List<Widget> pages = [
-    RegisterDisasterScreen(),
-    AddAlerts(),
-    MapsScreen(),
-    AlertPage(),
-    PendingRequests(),
-    ActiveIncidents(),
-    StatusPage(),
-    ReportsPage(),
+    const RegisterDisasterScreen(),
+    const AddAlerts(),
+    const MapsScreen(),
+    const AlertPage(),
+    const PendingRequests(),
+    const ActiveIncidents(),
+    const StatusPage(),
+    const ReportsPage(),
   ];
   List<String> pagetitle = [
     "Register Disaster",
@@ -64,19 +64,19 @@ class _DeptHomeState extends State<DeptHome> {
                 await context.read<AuthMethods>().signOut();
 
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                     (route) => false);
               },
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
             )
           ],
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           child: GridView.count(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               crossAxisCount: 2,
               children: List.generate(pages.length, (index) {
                 return PageBtn(

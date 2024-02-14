@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:disaster_safety/models/incident_model.dart';
-import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/core/router.dart';
 import 'package:disaster_safety/screens/user/homepage.dart';
-import 'package:disaster_safety/screens/user/upload_image.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 import 'package:disaster_safety/shared/buttons.dart';
@@ -33,24 +32,23 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
   final TextEditingController _description = TextEditingController();
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
-  String selectedIncident = "flood"; // Initial selected value
+  String selectedIncident = "Flood"; // Initial selected value
   String selectedAuthority =
       "Local Government Authority"; // Initial selected value
   String selectedPriority = "Low";
   bool showOtherField = false;
   List<String> incidentTypes = [
-    "flood",
-    "landslide",
-    "earthquake",
-    "wildfire",
-    "tsunami",
+    "Flood",
+    "Landslide",
+    "Earthquake",
+    "Wildfire",
+    "Tsunami",
   ];
-  List<String> priority = ["High", "Medium", "Low"];
+  List<String> priority = ["Critical", "High", "Medium", "Low"];
 
   // picking image
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
-  final bool _isUploading = false;
 
   // Future<void> _getImage(ImageSource source) async {
   //   final pickedFile = await _picker.pickImage(source: source);
@@ -118,7 +116,11 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: const Text("Raise Incident")),
+      appBar: AppBar(
+          title: const Text(
+        "Raise Incident",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      )),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -128,10 +130,16 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Select Incident Type:',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 16),
+                const Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Text(
+                      'Select Incident Type:',
+                      textAlign: TextAlign.start,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 CustomDropdown(
@@ -158,10 +166,16 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       )
                     : Container(),
                 const SizedBox(height: 20),
-                const Text(
-                  'Select Priority of incident:',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 16),
+                const Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Text(
+                      'Select Priority of Incident:',
+                      textAlign: TextAlign.start,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 CustomDropdown(
                   options: priority,
@@ -174,13 +188,16 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                     );
                   },
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Tinput(
                   controller: _description,
                   hint: "enter additional information",
                   label: "Description",
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 BtnPrimary(
                     title: "Choose Image",
@@ -189,7 +206,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       _openBottomSheet(context);
                     }),
                 _image != null
-                    ? Container(
+                    ? SizedBox(
                         width: width * 0.8,
                         child: ListTile(
                           title: Text("Selected Image: ${_image!.name}"),
@@ -199,7 +216,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                             height: 50, // Customize the height as needed
                           ),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () {
                               //
                               setState(() {
@@ -211,7 +228,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                       )
                     : Container(),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -238,21 +255,23 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                         Loadings.showLoadingDialog(context, _keyLoader,
                             msg: "Please wait..");
 
-                        String? img_path = await uploadImageToFirebaseStorage();
-                        if (img_path != null) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Uploaded Image successfully")));
+                        String? imgPath = await uploadImageToFirebaseStorage();
+                        if (imgPath != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("Uploaded Image successfully")));
                           String? uid = await SecureStorage().getUserId();
                           Incident incident = Incident(null,
                               id: "",
-                              incidentType: selectedIncident,
+                              incidentType: selectedIncident.toLowerCase(),
                               incidentPriority: selectedPriority,
                               reportedDate: DateTime.now().toUtc(),
                               longitude: widget.longitude,
                               latitude: widget.latitude,
                               description: _description.text,
                               reportedBy: uid!,
-                              imgpath: img_path,
+                              imgpath: imgPath,
                               isApproved: false,
                               isOpen: true);
                           try {
@@ -262,14 +281,11 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                                 .pop();
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(
-                                    "Incident Raised and pending for approval" +
-                                        widget.latitude.toString() +
-                                        " " +
-                                        widget.longitude.toString())));
+                                    "Incident Raised and pending for approval${widget.latitude} ${widget.longitude}")));
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()));
+                                    builder: (context) => const HomePage()));
                           } catch (e) {
                             Navigator.of(_keyLoader.currentContext!,
                                     rootNavigator: true)
@@ -297,7 +313,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
       builder: (BuildContext builderContext) {
         return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 28),
             height: 120,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -309,7 +325,7 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                     Navigator.pop(context);
                     print(_image);
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(
                         Icons.camera_alt_outlined,
@@ -328,13 +344,13 @@ class _RaiseIncidentPageState extends State<RaiseIncidentPage> {
                     Navigator.pop(context);
                     print(_image);
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(Icons.photo, size: 36),
                       SizedBox(
                         height: 5,
                       ),
-                      Text("Galary"),
+                      Text("Gallery"),
                     ],
                   ),
                 ),

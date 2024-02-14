@@ -12,8 +12,8 @@ class ActiveIncidents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("All Incidets"),
-        leading: Icon(Icons.settings),
+        title: const Text("All Incidets"),
+        leading: const Icon(Icons.settings),
       ),
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -79,8 +79,8 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(20),
-      title: Text('Alert Notification'),
+      contentPadding: const EdgeInsets.all(20),
+      title: const Text('Alert Notification'),
       content: SizedBox(
         height: 300,
         child: Column(
@@ -88,11 +88,11 @@ class CustomDialog extends StatelessWidget {
           children: [
             Text(
               "${incident.incidentType.substring(0, 1).toUpperCase()}${incident.incidentType.substring(1)} Disaster",
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "Priority: " + incident.incidentPriority,
-              style: TextStyle(fontSize: 18),
+              "Priority: ${incident.incidentPriority}",
+              style: const TextStyle(fontSize: 18),
             ),
             Text(incident.description),
             SizedBox(
@@ -110,9 +110,9 @@ class CustomDialog extends StatelessWidget {
             Navigator.of(context).pop(); // Close the dialog
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            backgroundColor: Colors.red,
           ),
-          child: Text('Close Incident', style: TextStyle(color: Colors.white)),
+          child: const Text('Close Incident', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

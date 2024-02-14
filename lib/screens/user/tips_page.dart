@@ -29,14 +29,14 @@ class TipsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tips"),
-        leading: Icon(Icons.tips_and_updates),
+        title: const Text("Tips"),
+        leading: const Icon(Icons.tips_and_updates),
       ),
       body: ListView.builder(
         itemCount: disasters.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.ac_unit_outlined,
               color: Consts.kprimary,
             ),

@@ -7,14 +7,14 @@ class CommunityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Community"),
-        leading: Icon(Icons.group_add),
+        title: const Text("Community"),
+        leading: const Icon(Icons.group_add),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: Column(children: []),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: const Column(children: []),
         ),
       )),
     );

@@ -95,7 +95,7 @@ class AuthMethods {
 
         case "INVALID_LOGIN_CREDENTIALS":
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Invalid Password")));
+              .showSnackBar(const SnackBar(content: Text("Invalid Password")));
       }
       return null;
     }

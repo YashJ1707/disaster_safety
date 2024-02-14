@@ -1,16 +1,16 @@
-import 'dart:ffi';
 import 'dart:ui' as ui;
 
 import 'package:disaster_safety/models/incident_model.dart';
-import 'package:disaster_safety/router.dart';
+
 import 'package:disaster_safety/screens/user/incident_info.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/geolocator.dart';
-import 'package:disaster_safety/shared/dropdown.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../core/router.dart';
 
 class MapsScreen extends StatefulWidget {
   const MapsScreen({super.key});
@@ -56,7 +56,6 @@ class MapsScreenState extends State<MapsScreen> {
     });
 
     DbMethods().getIncidents().then((value) => {
-          print(value),
           setState(
             () {
               incidents = value;
@@ -100,8 +99,8 @@ class MapsScreenState extends State<MapsScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
                 blurRadius: 10, offset: Offset(0, 3), color: Colors.black45)
           ],
         ),
@@ -180,7 +179,8 @@ Future<BitmapDescriptor> getByteIcon(String asset) async {
 
 Future<BitmapDescriptor> getIcon(String incident) async {
   switch (incident) {
-    case "flood" || "tsunami":
+    case "flood":
+    case "tsunami":
       return await getByteIcon("wave.png");
     case "earthquake":
       return await getByteIcon("earthquake.png");

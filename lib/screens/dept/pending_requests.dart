@@ -13,8 +13,8 @@ class PendingRequests extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pending Approvals"),
-        leading: Icon(Icons.settings),
+        title: const Text("Pending Approvals"),
+        leading: const Icon(Icons.settings),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
@@ -85,8 +85,8 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(20),
-      title: Text('Alert Notification'),
+      contentPadding: const EdgeInsets.all(20),
+      title: const Text('Alert Notification'),
       content: SizedBox(
         height: 300,
         child: Column(
@@ -94,11 +94,11 @@ class CustomDialog extends StatelessWidget {
           children: [
             Text(
               "${incident.incidentType.substring(0, 1).toUpperCase()}${incident.incidentType.substring(1)} Disaster",
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "Priority: " + incident.incidentPriority,
-              style: TextStyle(fontSize: 18),
+              "Priority: ${incident.incidentPriority}",
+              style: const TextStyle(fontSize: 18),
             ),
             Text(incident.description),
             SizedBox(
@@ -117,20 +117,20 @@ class CustomDialog extends StatelessWidget {
             Navigator.of(context).pop(); // Close the dialog
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            backgroundColor: Colors.red,
           ),
-          child: Text('Reject', style: TextStyle(color: Colors.white)),
+          child: const Text('Reject', style: TextStyle(color: Colors.white)),
         ),
         ElevatedButton(
           onPressed: () async {
             await DbMethods().approveIncident(incident: incident);
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => DeptHome())); // Close the dialog
+                builder: (context) => const DeptHome())); // Close the dialog
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            backgroundColor: Colors.green,
           ),
-          child: Text(
+          child: const Text(
             'Raise Alert',
             style: TextStyle(color: Colors.white),
           ),

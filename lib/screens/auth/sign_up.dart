@@ -1,4 +1,4 @@
-import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/core/router.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/services/auth.dart';
 import 'package:disaster_safety/services/db.dart';
@@ -24,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _deptController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
-  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   final List<String> roleTypes = ["user", "local_body"];
   String selectedRole = "user";
@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Texts.h1(title: "Join a Community of Preparedness"),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Tinput(
@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   controller: _passController,
                   isobsecure: true,
                 ),
-                Text(
+                const Text(
                   "Select Role",
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -99,22 +99,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     onpress: () async {
                       Loadings.showLoadingDialog(context, _keyLoader);
                       try {
-                        Map<String, dynamic> user_data = {
+                        Map<String, dynamic> userData = {
                           "name": _nameController.text.toString(),
                           "useremail": _emailController.text.toString(),
                           "role": selectedRole,
                         };
 
-                        Map<String, dynamic> local_body_data = {
+                        Map<String, dynamic> localBodyData = {
                           "name": _nameController.text.toString(),
                           "useremail": _emailController.text.toString(),
                           "role": selectedRole,
                           "dept_name": _deptController.text,
                         };
 
-                        Map<String, dynamic> data = selectedRole == "user"
-                            ? user_data
-                            : local_body_data;
+                        Map<String, dynamic> data =
+                            selectedRole == "user" ? userData : localBodyData;
                         UserCredential? user = await context
                             .read<AuthMethods>()
                             .signUp(
@@ -130,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Navigator.of(_keyLoader.currentContext!,
                                   rootNavigator: true)
                               .pop();
-                          Routes.push(context, LoginPage());
+                          Routes.push(context, const LoginPage());
                         }
                       } catch (e) {
                         print(e);
@@ -151,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       BtnText(
                         title: "Login",
                         onpress: () {
-                          Routes.push(context, LoginPage());
+                          Routes.push(context, const LoginPage());
                         },
                       ),
                     ],

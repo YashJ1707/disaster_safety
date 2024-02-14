@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -53,10 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCZ4ziayZqJK-agqhFinrY5wJsPimHahdQ',
-    appId: '1:599232753020:android:581f317bb91de09e5e08f9',
-    messagingSenderId: '599232753020',
-    projectId: 'communityresiliancenetwork',
-    storageBucket: 'communityresiliancenetwork.appspot.com',
+    apiKey: 'AIzaSyC2aR7Kr1KnZQ5CvqzbN-e1goVvU-HW6v0',
+    appId: '1:516754607616:android:18468cec310302d81752e5',
+    messagingSenderId: '516754607616',
+    projectId: 'healthy-sign-410112',
+    storageBucket: 'healthy-sign-410112.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAy0-yU6InJ_EwSf3Lvzt0Yu_2eKnFwRxg',
+    appId: '1:516754607616:ios:ecedd350622f40261752e5',
+    messagingSenderId: '516754607616',
+    projectId: 'healthy-sign-410112',
+    storageBucket: 'healthy-sign-410112.appspot.com',
+    iosBundleId: 'com.example.disasterSafety',
   );
 }

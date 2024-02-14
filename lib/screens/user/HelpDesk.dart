@@ -53,7 +53,7 @@ class HelpDesk extends StatelessWidget {
   ];
 
   Future<List<Map<String, dynamic>>> getOrgs() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return organizationsData;
   }
 
@@ -61,7 +61,7 @@ class HelpDesk extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Help & Contact"),
+        title: const Text("Help & Contact"),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
@@ -82,23 +82,23 @@ class HelpDesk extends StatelessWidget {
                       },
                       child: Card(
                         margin:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(children: [
                             Texts.h2(title: data['name']),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Text(data['location']),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(data['phone']),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(data['email']),

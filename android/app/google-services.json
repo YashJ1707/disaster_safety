@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "599232753020",
-    "project_id": "communityresiliancenetwork",
-    "storage_bucket": "communityresiliancenetwork.appspot.com"
+    "project_number": "516754607616",
+    "project_id": "healthy-sign-410112",
+    "storage_bucket": "healthy-sign-410112.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:599232753020:android:581f317bb91de09e5e08f9",
+        "mobilesdk_app_id": "1:516754607616:android:18468cec310302d81752e5",
         "android_client_info": {
           "package_name": "com.example.disaster_safety"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "599232753020-l37k0j4qev8rltofalippbs341gvs56t.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCZ4ziayZqJK-agqhFinrY5wJsPimHahdQ"
+          "current_key": "AIzaSyC2aR7Kr1KnZQ5CvqzbN-e1goVvU-HW6v0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "599232753020-l37k0j4qev8rltofalippbs341gvs56t.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516754607616:android:d4c38f9dfa54682d1752e5",
+        "android_client_info": {
+          "package_name": "com.example.rescue_wave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2aR7Kr1KnZQ5CvqzbN-e1goVvU-HW6v0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

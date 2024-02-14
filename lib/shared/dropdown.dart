@@ -8,7 +8,7 @@ class CustomDropdown extends StatefulWidget {
   final String selectedValue;
   final ValueChanged<String?> onChanged;
 
-  CustomDropdown({
+  const CustomDropdown({super.key, 
     required this.options,
     required this.selectedValue,
     required this.onChanged,
@@ -22,8 +22,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       width: min(300, MediaQuery.of(context).size.width * 0.8),
       decoration: BoxDecoration(
         border: Border.all(color: Consts.kdark),

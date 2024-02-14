@@ -89,7 +89,7 @@ class BtnText extends StatelessWidget {
         onPressed: onpress,
         child: Text(
           title,
-          style: TextStyle(color: Consts.kblack, fontSize: 18),
+          style: const TextStyle(color: Consts.kblack, fontSize: 18),
         ),
       ),
     );
@@ -103,8 +103,8 @@ class PageBtn extends StatelessWidget {
   final IconData icon;
   final Function() onpress;
 
-  PageBtn(
-      {required this.title,
+  const PageBtn(
+      {super.key, required this.title,
       required this.icon,
       required this.onpress,
       required this.index});
@@ -177,6 +177,7 @@ class PageBtn extends StatelessWidget {
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all(Colors.black),
           ),
+          onPressed: onpress,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -194,11 +195,11 @@ class PageBtn extends StatelessWidget {
                   color: Consts.kprimary,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Center(
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -206,7 +207,6 @@ class PageBtn extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: onpress,
         ));
   }
 }

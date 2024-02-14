@@ -1,5 +1,5 @@
 import 'package:disaster_safety/models/alert_model.dart';
-import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/core/router.dart';
 import 'package:disaster_safety/services/db.dart';
 import 'package:disaster_safety/services/push_notification.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
@@ -11,7 +11,7 @@ import 'package:disaster_safety/shared/themes.dart';
 import 'package:flutter/material.dart';
 
 class AddAlerts extends StatefulWidget {
-  AddAlerts({super.key});
+  const AddAlerts({super.key});
 
   @override
   State<AddAlerts> createState() => _AddAlertsState();
@@ -27,11 +27,11 @@ class _AddAlertsState extends State<AddAlerts> {
   String selectedTag = "General";
 
   List<String> tagOptions = ["Awareness", "Emergency", "Important", "General"];
-  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   @override
   Widget build(BuildContext context) {
-      _notificationService.initialize();
+    _notificationService.initialize();
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +55,7 @@ class _AddAlertsState extends State<AddAlerts> {
             ),
             Container(
               // alignment: Alignment.centerLeft,
-              child: Text(
+              child: const Text(
                 "Choose alert Tag",
               ),
             ),
@@ -113,8 +113,8 @@ class _AddAlertsState extends State<AddAlerts> {
                           .pop();
 
                       // await DbMethods().raiseIncident(incident);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Alert Added Successfully")));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Alert Added Successfully")));
                       //         "Incident Raised and pending for approval" +
                       //             widget.latitude.toString() +
                       //             " " +

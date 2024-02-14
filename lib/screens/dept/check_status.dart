@@ -7,14 +7,14 @@ class StatusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ongoing Emergencies "),
-        leading: Icon(Icons.settings),
+        title: const Text("Ongoing Emergencies "),
+        leading: const Icon(Icons.settings),
       ),
       body: SingleChildScrollView(
           child: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: Column(children: []),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: const Column(children: []),
         ),
       )),
     );

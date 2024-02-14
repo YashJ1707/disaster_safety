@@ -1,14 +1,14 @@
 class MyValidators {
   static String? v_name(String? value) {
-    if (value == null || value.isEmpty)
+    if (value == null || value.isEmpty) {
       return "please enter usernane";
-    else {
+    } else {
       return null;
     }
   }
 
   static String? v_email(String? value) {
-    final emailPattern =
+    const emailPattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     // final emailPattern = r'^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$';
 
@@ -23,9 +23,9 @@ class MyValidators {
   }
 
   static String? v_pass(String? value) {
-    if (value == null || value.isEmpty)
+    if (value == null || value.isEmpty) {
       return "please enter password";
-    else if (value.length < 6) {
+    } else if (value.length < 6) {
       return "Password should be more than 6 Digits";
     } else {
       return null;

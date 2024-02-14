@@ -1,5 +1,5 @@
 import 'package:disaster_safety/models/user_model.dart';
-import 'package:disaster_safety/router.dart';
+import 'package:disaster_safety/core/router.dart';
 import 'package:disaster_safety/screens/user/HelpDesk.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/user/settings_page.dart';
@@ -13,7 +13,7 @@ import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,12 +23,12 @@ class _HomePageState extends State<HomePage> {
   late UserModel user;
 
   List<Widget> pages = [
-    RegisterDisasterScreen(),
-    MapsScreen(),
-    AlertPage(),
+    const RegisterDisasterScreen(),
+    const MapsScreen(),
+    const AlertPage(),
     TipsPage(),
-    UpdatesPage(),
-    SettingsPage(),
+    const UpdatesPage(),
+    const SettingsPage(),
     HelpDesk(),
   ];
 
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     "View Map",
     "Alerts",
     "Tips",
-    "Updates",
+    "My Incidents",
     "Settings",
     "Help Desk"
   ];
@@ -76,15 +76,15 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               title: Text(
                 "Welcome ${user.name}",
-                style: TextStyle(fontWeight: FontWeight.w700),
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
             body: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
               child: GridView.count(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(pages.length, (index) {
                     return PageBtn(

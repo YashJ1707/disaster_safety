@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
 class ImageUploader extends StatefulWidget {
+  const ImageUploader({super.key});
+
   @override
   _ImageUploaderState createState() => _ImageUploaderState();
 }
@@ -13,7 +15,7 @@ class ImageUploader extends StatefulWidget {
 class _ImageUploaderState extends State<ImageUploader> {
   final ImagePicker _picker = ImagePicker();
   late XFile? _image;
-  bool _isUploading = false;
+  final bool _isUploading = false;
 
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
@@ -69,28 +71,28 @@ class _ImageUploaderState extends State<ImageUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Uploader'),
+        title: const Text('Image Uploader'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _image == null
-                ? Text('No image selected.')
+                ? const Text('No image selected.')
                 : Image.file(File(_image!.path)),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => _getImage(ImageSource.gallery),
-              child: Text('Pick an image from gallery'),
+              child: const Text('Pick an image from gallery'),
             ),
             ElevatedButton(
               onPressed: () => _getImage(ImageSource.camera),
-              child: Text('Take a picture'),
+              child: const Text('Take a picture'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _isUploading ? null : uploadImageToFirebaseStorage,
-              child: Text('Upload Image to Firebase Storage'),
+              child: const Text('Upload Image to Firebase Storage'),
             ),
           ],
         ),

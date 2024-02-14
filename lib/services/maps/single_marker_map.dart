@@ -15,7 +15,7 @@ class _SingleMarkerMapState extends State<SingleMarkerMap> {
   void initState() {
     super.initState();
     marker.add(Marker(
-        markerId: MarkerId("Id"),
+        markerId: const MarkerId("Id"),
         position: widget.location,
         icon: BitmapDescriptor.defaultMarker));
   }

@@ -22,8 +22,8 @@ class AlertPage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 print(snapshot.data!.length);
-                if (snapshot.data!.length == 0) {
-                  return Center(
+                if (snapshot.data!.isEmpty) {
+                  return const Center(
                     child: Text("No Alerst currently"),
                   );
                 }
