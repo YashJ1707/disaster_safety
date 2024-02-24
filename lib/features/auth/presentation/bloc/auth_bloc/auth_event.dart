@@ -40,8 +40,9 @@ final class ConfirmResetEvent extends AuthEvent {
 
 final class UserLogoutEvent extends AuthEvent {}
 
-final class UserAccountDelteEvent extends AuthEvent {
+final class UserAccountDeleteEvent extends AuthEvent {
   final String email;
+  final String uid;
 
-  const UserAccountDelteEvent({required this.email});
+  const UserAccountDeleteEvent(this.uid, {required this.email});
 }

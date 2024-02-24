@@ -3,20 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i6;
 
-import 'package:cloud_firestore/cloud_firestore.dart' as _i6;
 import 'package:dartz/dartz.dart' as _i4;
-import 'package:disaster_safety/core/error/failure.dart' as _i10;
+import 'package:disaster_safety/core/error/failure.dart' as _i7;
 import 'package:disaster_safety/features/auth/data/datasource/auth_datasource.dart'
     as _i2;
 import 'package:disaster_safety/features/auth/data/datasource/db_datasource.dart'
     as _i3;
 import 'package:disaster_safety/features/auth/data/model/user_model.dart'
-    as _i7;
-import 'package:disaster_safety/features/auth/data/repository/auth_repository_impl.dart'
     as _i8;
-import 'package:firebase_auth/firebase_auth.dart' as _i5;
+import 'package:disaster_safety/features/auth/data/repository/auth_repository_impl.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -64,63 +62,11 @@ class _FakeEither_2<L, R> extends _i1.SmartFake implements _i4.Either<L, R> {
         );
 }
 
-class _FakeFirebaseAuth_3 extends _i1.SmartFake implements _i5.FirebaseAuth {
-  _FakeFirebaseAuth_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUser_4 extends _i1.SmartFake implements _i5.User {
-  _FakeUser_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUserCredential_5 extends _i1.SmartFake
-    implements _i5.UserCredential {
-  _FakeUserCredential_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeCollectionReference_6<T extends Object?> extends _i1.SmartFake
-    implements _i6.CollectionReference<T> {
-  _FakeCollectionReference_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUserModel_7 extends _i1.SmartFake implements _i7.UserModel {
-  _FakeUserModel_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [AuthRepositoryImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRepositoryImpl extends _i1.Mock
-    implements _i8.AuthRepositoryImpl {
+    implements _i5.AuthRepositoryImpl {
   MockAuthRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -144,7 +90,7 @@ class MockAuthRepositoryImpl extends _i1.Mock
       ) as _i3.DbDatasourceImpl);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, void>> delteAccount(
+  _i6.Future<_i4.Either<_i7.Failure, void>> delteAccount(
     String? uid,
     String? email,
   ) =>
@@ -156,8 +102,8 @@ class MockAuthRepositoryImpl extends _i1.Mock
             email,
           ],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, void>>.value(
-            _FakeEither_2<_i10.Failure, void>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, void>>.value(
+            _FakeEither_2<_i7.Failure, void>(
           this,
           Invocation.method(
             #delteAccount,
@@ -167,10 +113,10 @@ class MockAuthRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, void>>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, void>>);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>> login(
+  _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>> login(
     String? email,
     String? password,
   ) =>
@@ -182,8 +128,8 @@ class MockAuthRepositoryImpl extends _i1.Mock
             password,
           ],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>>.value(
-            _FakeEither_2<_i10.Failure, _i7.UserModel>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>>.value(
+            _FakeEither_2<_i7.Failure, _i8.UserModel>(
           this,
           Invocation.method(
             #login,
@@ -193,11 +139,11 @@ class MockAuthRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>>);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, void>> signUp(
-    _i7.UserModel? user,
+  _i6.Future<_i4.Either<_i7.Failure, void>> signUp(
+    _i8.UserModel? user,
     String? password,
   ) =>
       (super.noSuchMethod(
@@ -208,8 +154,8 @@ class MockAuthRepositoryImpl extends _i1.Mock
             password,
           ],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, void>>.value(
-            _FakeEither_2<_i10.Failure, void>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, void>>.value(
+            _FakeEither_2<_i7.Failure, void>(
           this,
           Invocation.method(
             #signUp,
@@ -219,28 +165,28 @@ class MockAuthRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, void>>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, void>>);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>> updateAccount(
-          _i7.UserModel? user) =>
+  _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>> updateAccount(
+          _i8.UserModel? user) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateAccount,
           [user],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>>.value(
-            _FakeEither_2<_i10.Failure, _i7.UserModel>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>>.value(
+            _FakeEither_2<_i7.Failure, _i8.UserModel>(
           this,
           Invocation.method(
             #updateAccount,
             [user],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, _i7.UserModel>>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, _i8.UserModel>>);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, void>> confirmResetPassord(
+  _i6.Future<_i4.Either<_i7.Failure, void>> confirmResetPassord(
     String? email,
     String? code,
     String? password,
@@ -254,8 +200,8 @@ class MockAuthRepositoryImpl extends _i1.Mock
             password,
           ],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, void>>.value(
-            _FakeEither_2<_i10.Failure, void>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, void>>.value(
+            _FakeEither_2<_i7.Failure, void>(
           this,
           Invocation.method(
             #confirmResetPassord,
@@ -266,229 +212,23 @@ class MockAuthRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, void>>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, void>>);
 
   @override
-  _i9.Future<_i4.Either<_i10.Failure, void>> sendresetPassordEmail(
+  _i6.Future<_i4.Either<_i7.Failure, void>> sendresetPassordEmail(
           String? email) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendresetPassordEmail,
           [email],
         ),
-        returnValue: _i9.Future<_i4.Either<_i10.Failure, void>>.value(
-            _FakeEither_2<_i10.Failure, void>(
+        returnValue: _i6.Future<_i4.Either<_i7.Failure, void>>.value(
+            _FakeEither_2<_i7.Failure, void>(
           this,
           Invocation.method(
             #sendresetPassordEmail,
             [email],
           ),
         )),
-      ) as _i9.Future<_i4.Either<_i10.Failure, void>>);
-}
-
-/// A class which mocks [AuthDatasourceImpl].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAuthDatasourceImpl extends _i1.Mock
-    implements _i2.AuthDatasourceImpl {
-  MockAuthDatasourceImpl() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.FirebaseAuth get fauth => (super.noSuchMethod(
-        Invocation.getter(#fauth),
-        returnValue: _FakeFirebaseAuth_3(
-          this,
-          Invocation.getter(#fauth),
-        ),
-      ) as _i5.FirebaseAuth);
-
-  @override
-  _i9.Future<void> deleteUser(String? username) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteUser,
-          [username],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<_i5.User> googleLogin() => (super.noSuchMethod(
-        Invocation.method(
-          #googleLogin,
-          [],
-        ),
-        returnValue: _i9.Future<_i5.User>.value(_FakeUser_4(
-          this,
-          Invocation.method(
-            #googleLogin,
-            [],
-          ),
-        )),
-      ) as _i9.Future<_i5.User>);
-
-  @override
-  _i9.Future<void> logout() => (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<void> sendResetCode(String? email) => (super.noSuchMethod(
-        Invocation.method(
-          #sendResetCode,
-          [email],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<void> confirmPasswordResetCode(
-    String? email,
-    String? code,
-    String? password,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #confirmPasswordResetCode,
-          [
-            email,
-            code,
-            password,
-          ],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<_i5.UserCredential> signUp(
-    String? email,
-    String? password,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #signUp,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i9.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
-          this,
-          Invocation.method(
-            #signUp,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-      ) as _i9.Future<_i5.UserCredential>);
-
-  @override
-  _i9.Future<_i5.User> usernameLogin(
-    String? email,
-    String? password,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #usernameLogin,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i9.Future<_i5.User>.value(_FakeUser_4(
-          this,
-          Invocation.method(
-            #usernameLogin,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-      ) as _i9.Future<_i5.User>);
-}
-
-/// A class which mocks [DbDatasourceImpl].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockDbDatasourceImpl extends _i1.Mock implements _i3.DbDatasourceImpl {
-  MockDbDatasourceImpl() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i6.CollectionReference<Object?> get userRef => (super.noSuchMethod(
-        Invocation.getter(#userRef),
-        returnValue: _FakeCollectionReference_6<Object?>(
-          this,
-          Invocation.getter(#userRef),
-        ),
-      ) as _i6.CollectionReference<Object?>);
-
-  @override
-  _i9.Future<void> addUserData(
-    _i7.UserModel? user,
-    _i5.UserCredential? credential,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addUserData,
-          [
-            user,
-            credential,
-          ],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<void> removeData(String? uid) => (super.noSuchMethod(
-        Invocation.method(
-          #removeData,
-          [uid],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-
-  @override
-  _i9.Future<_i7.UserModel> getUserData({required String? uid}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getUserData,
-          [],
-          {#uid: uid},
-        ),
-        returnValue: _i9.Future<_i7.UserModel>.value(_FakeUserModel_7(
-          this,
-          Invocation.method(
-            #getUserData,
-            [],
-            {#uid: uid},
-          ),
-        )),
-      ) as _i9.Future<_i7.UserModel>);
-
-  @override
-  _i9.Future<void> updateUserData(_i7.UserModel? user) => (super.noSuchMethod(
-        Invocation.method(
-          #updateUserData,
-          [user],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+      ) as _i6.Future<_i4.Either<_i7.Failure, void>>);
 }

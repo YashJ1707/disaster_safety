@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disaster_safety/models/alert_model.dart';
 import 'package:disaster_safety/models/incident_model.dart';
 import 'package:disaster_safety/models/resources_model.dart';
+
 import 'package:disaster_safety/models/user_model.dart';
 import 'package:disaster_safety/services/secure_storage.dart';
 
@@ -201,9 +202,7 @@ class DbMethods {
   Future<void> deleteAlert(Alert alert) async {
     try {
       await alertRef.doc(alert.id).delete();
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<List<Alert>> getAlerts() async {

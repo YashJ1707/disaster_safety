@@ -28,3 +28,7 @@ final class AuthSuccessState extends AuthState {
   @override
   List<Object> get props => [user];
 }
+
+final class AuthEmailSentState extends AuthState {
+  // final String
+}

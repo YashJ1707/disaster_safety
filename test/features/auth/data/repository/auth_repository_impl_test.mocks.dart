@@ -13,8 +13,6 @@ import 'package:disaster_safety/features/auth/data/datasource/db_datasource.dart
 import 'package:disaster_safety/features/auth/data/model/user_model.dart'
     as _i4;
 import 'package:firebase_auth/firebase_auth.dart' as _i2;
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart'
-    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 
@@ -447,7 +445,7 @@ class MockUser extends _i1.Mock implements _i2.User {
       ) as _i6.Future<_i2.UserCredential>);
 
   @override
-  _i6.Future<_i2.UserCredential> linkWithProvider(_i9.AuthProvider? provider) =>
+  _i6.Future<_i2.UserCredential> linkWithProvider(_i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #linkWithProvider,
@@ -464,7 +462,7 @@ class MockUser extends _i1.Mock implements _i2.User {
 
   @override
   _i6.Future<_i2.UserCredential> reauthenticateWithProvider(
-          _i9.AuthProvider? provider) =>
+          _i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #reauthenticateWithProvider,
@@ -481,7 +479,7 @@ class MockUser extends _i1.Mock implements _i2.User {
 
   @override
   _i6.Future<_i2.UserCredential> reauthenticateWithPopup(
-          _i9.AuthProvider? provider) =>
+          _i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #reauthenticateWithPopup,
@@ -497,7 +495,7 @@ class MockUser extends _i1.Mock implements _i2.User {
       ) as _i6.Future<_i2.UserCredential>);
 
   @override
-  _i6.Future<void> reauthenticateWithRedirect(_i9.AuthProvider? provider) =>
+  _i6.Future<void> reauthenticateWithRedirect(_i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #reauthenticateWithRedirect,
@@ -508,7 +506,7 @@ class MockUser extends _i1.Mock implements _i2.User {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<_i2.UserCredential> linkWithPopup(_i9.AuthProvider? provider) =>
+  _i6.Future<_i2.UserCredential> linkWithPopup(_i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #linkWithPopup,
@@ -524,7 +522,7 @@ class MockUser extends _i1.Mock implements _i2.User {
       ) as _i6.Future<_i2.UserCredential>);
 
   @override
-  _i6.Future<void> linkWithRedirect(_i9.AuthProvider? provider) =>
+  _i6.Future<void> linkWithRedirect(_i2.AuthProvider? provider) =>
       (super.noSuchMethod(
         Invocation.method(
           #linkWithRedirect,
