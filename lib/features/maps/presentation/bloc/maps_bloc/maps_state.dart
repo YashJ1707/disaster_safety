@@ -12,3 +12,9 @@ final class MapsInitial extends MapsState {}
 final class MapsLoadingState extends MapsState {}
 
 final class MapsLoadedState extends MapsState {}
+
+final class MapsFailureState extends MapsState {
+  final String message;
+
+  MapsFailureState({required this.message});
+}

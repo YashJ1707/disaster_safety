@@ -4,7 +4,7 @@ import 'package:disaster_safety/models/incident_model.dart';
 
 import 'package:disaster_safety/screens/user/incident_info.dart';
 import 'package:disaster_safety/services/db.dart';
-import 'package:disaster_safety/services/geolocator.dart';
+import 'package:disaster_safety/core/geolocator.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,5 +1,5 @@
 import 'package:disaster_safety/screens/user/raise_incident.dart';
-import 'package:disaster_safety/services/geolocator.dart';
+import 'package:disaster_safety/core/geolocator.dart';
 import 'package:disaster_safety/shared/loading.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
-enum IncidentPriority { high, low, mediume, critical }
+enum IncidentPriority { all, high, low, mediume, critical }
 
-enum IncidentType { flood, landslide, tsunami, hurricane, thunderstorm }
+enum IncidentType { all, flood, landslide, tsunami, hurricane, thunderstorm }
 
-enum ResourceType { shelter, supplies, rescue_point }
+enum ResourceType { all, shelter, supplies, rescue_point }
