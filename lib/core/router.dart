@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Routes {
   static Future<void> push(BuildContext context, Widget child) {
@@ -28,7 +29,19 @@ class Routes {
 
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
       BuildContext context, String text) {
-    return ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(text)));
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(milliseconds: 800),
+        backgroundColor: Colors.red,
+        content: Center(
+            child: Text(
+          text,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700),
+        )),
+      ),
+    );
   }
 }

@@ -29,6 +29,8 @@ final class AuthSuccessState extends AuthState {
   List<Object> get props => [user];
 }
 
+final class SignupSuccessState extends AuthState {}
+
 final class AuthEmailSentState extends AuthState {
   // final String
 }

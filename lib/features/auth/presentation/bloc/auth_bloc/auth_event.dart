@@ -16,11 +16,16 @@ final class UserSignInEvent extends AuthEvent {
 
 final class UserSignupEvent extends AuthEvent {
   final String email;
+  final String name;
   final String password;
-  final UserModel user;
+  final String confirmPassword;
 
-  const UserSignupEvent(
-      {required this.email, required this.password, required this.user});
+  const UserSignupEvent({
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+  });
 }
 
 final class SendResetEmailEvent extends AuthEvent {

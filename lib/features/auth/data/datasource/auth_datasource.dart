@@ -86,8 +86,7 @@ class AuthDatasourceImpl implements AuthDatasource {
       if (e.code == 'weak-password') {
         throw AuthException(message: "The password provided is too weak;");
       } else if (e.code == 'email-already-in-use') {
-        throw AuthException(
-            message: "The account already exists for that email");
+        throw AuthException(message: "The account already exists for email");
       } else {
         throw AuthException(message: e.message.toString());
       }
@@ -113,7 +112,7 @@ class AuthDatasourceImpl implements AuthDatasource {
         throw AuthException(message: "Invalid Credentials");
       }
     } catch (e) {
-      throw ServerException();
+      // throw ServerException();
     }
     throw ServerException();
   }

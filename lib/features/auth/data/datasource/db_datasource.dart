@@ -23,9 +23,12 @@ class DbDatasourceImpl implements DbDatasource {
       String uid = credential.user!.uid;
       userMap.update("id", (value) => credential.user?.uid);
       userMap.update("id", (value) => credential.user?.uid);
-      await userRef.doc(uid).set({...userMap}).catchError(
-          (error) => throw DatabaseException(error.toString()));
+      await userRef.doc(uid).set({...userMap}).catchError((error) {
+        print(error.toString());
+        throw DatabaseException(error.toString());
+      });
     } catch (e) {
+      print(e.toString());
       throw DatabaseException(e.toString());
     }
   }
@@ -44,14 +47,17 @@ class DbDatasourceImpl implements DbDatasource {
     try {
       final snapshot = await userRef.doc(uid).get();
       if (snapshot.exists) {
-        final Map<String, dynamic> data = snapshot.data as Map<String, dynamic>;
+        final Map<String, dynamic> data =
+            snapshot.data() as Map<String, dynamic>;
         final UserModel user = UserModel.fromMap(data);
         return user;
       } else {
         throw DatabaseException("Data does not exist");
       }
+    } on DatabaseException catch (e) {
+      throw DatabaseException(e.message);
     } catch (e) {
-      throw ServerException();
+      throw ServerException(e.toString());
     }
   }
 

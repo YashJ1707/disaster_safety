@@ -31,11 +31,15 @@ class AuthRepositoryImpl implements AuthRepoistory {
       String email, String password) async {
     try {
       final User response = await authDatasource.usernameLogin(email, password);
-      dbDatasource.getUserData(uid: response.uid);
-    } catch (e) {
-      return Left(AuthFailure(message: (e as AuthException).message));
+      final userData = await dbDatasource.getUserData(uid: response.uid);
+      return Right(userData);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message!));
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(message: e.message));
+    } on AuthException catch (e) {
+      return Left(AuthFailure(message: e.message));
     }
-    return Left(ServerFailure(message: "Something went wrong"));
   }
 
   @override
@@ -43,10 +47,23 @@ class AuthRepositoryImpl implements AuthRepoistory {
     try {
       final UserCredential credential =
           await authDatasource.signUp(user.email, password);
-      await dbDatasource.addUserData(user, credential);
+      try {
+        await dbDatasource.addUserData(user, credential);
+      } on ServerException catch (e) {
+        authDatasource.deleteUser(user.email);
+        return Left(ServerFailure(message: e.message!));
+      } on DatabaseException catch (e) {
+        authDatasource.deleteUser(user.email);
+        return Left(DatabaseFailure(message: e.message));
+      }
       return const Right(());
-    } catch (e) {
-      return Left(AuthFailure(message: (e as AuthException).message));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message!));
+    } on DatabaseException catch (e) {
+      print(e.message);
+      return Left(DatabaseFailure(message: e.message));
+    } on AuthException catch (e) {
+      return Left(AuthFailure(message: e.message));
     }
   }
 

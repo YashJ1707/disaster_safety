@@ -1,4 +1,5 @@
 import 'package:disaster_safety/core/router.dart';
+import 'package:disaster_safety/features/auth/presentation/pages/auth_landing_page.dart';
 import 'package:disaster_safety/screens/user/alert_page.dart';
 import 'package:disaster_safety/screens/auth/login.dart';
 import 'package:disaster_safety/screens/user/community_page.dart';
@@ -62,7 +63,8 @@ class _AdminHomeState extends State<AdminHome> {
                 await context.read<AuthMethods>().signOut();
 
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const AuthLandingPage()),
                     (route) => false);
               },
               icon: const Icon(Icons.logout),
